@@ -1,0 +1,62 @@
+-- Handles message; Communicates with GUI; Does level loading
+
+local player_start_position = vmath.vector3(0, 0, 0);
+
+---- Core
+function init(self)
+	self.current_level = nil
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("load_level") then
+		load_level(self, message.level)
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end
+
+---- Facilities
+function load_level(self, level)
+	-- which level to load
+	local f = "/levels#factory-" .. level
+	-- where should the level be spawned?
+	local p = vmath.vector3()
+	-- spawn the level
+	local next_level = collectionfactory.create(f, p)
+
+	-- unload: level transition effect can go here...
+	if self.current_level then
+		go.delete(self.current_screen)
+	end
+	-- the spawed next level is set as new current level
+	self.current_screen = next_level
+
+	-- reset player location
+	go.set_position(player_start_position, "/player")
+
+	-- update gui
+	-- ...
+end
+
+---- Functions
+function start_game(self)
+	
+end
