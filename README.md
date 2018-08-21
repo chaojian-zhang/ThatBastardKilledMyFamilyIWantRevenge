@@ -27,6 +27,7 @@ This folder will be shared among programmers and artists. For efficient and conf
 2. Make file updates using git commands (or use Github Desktop), especially when **renaming files**
 3. Make minor changes and commit often; Don't commit extremely large temporary files (e.g. PSD files); Do write git **messages** summarizing your changes
 4. Resolve all conflicts and make sure everything runs before you commit (otherwise use `git stash` to temporarily save unusable parts locally before committing changes)
+5. Notice current repository is around 2Mb, let's making it less than 40Mb for the final executable (excluding .git history)
 
 ## Cool Git Syntax to use with Defold
 
