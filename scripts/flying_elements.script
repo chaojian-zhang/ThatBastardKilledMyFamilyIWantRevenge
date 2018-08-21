@@ -1,0 +1,31 @@
+-- This script provides an interface
+-- Attach this script to any game object and that game object will be animated
+
+go.property("x_speed", 0)
+go.property("y_speed", -60)
+go.property("boundary_min_x", -720)		-- This size should match display size
+go.property("boundary_max_x", 720)		-- This size should match display size
+go.property("boundary_min_y", -1280)	-- This size should match display size
+go.property("boundary_max_y", 1280)		-- This size should match display size
+
+function update(self, dt)
+	local p = go.get_position()
+
+	-- apply the speed
+	p.x = p.x + self.x_speed * dt
+	p.y = p.y + self.y_speed * dt
+	
+	-- reset the object t otherwise of screen when they reach the far left/right/top/bottom to create infinite scrolling
+	if p.x <= self.boundary_min_x * 2 then
+		p.x = self.boundary_max_x * 2
+	elseif p.x >= self.boundary_max_x * 2 then
+		p.x = self.boundary_min_x * 2
+	elseif p.y <= self.boundary_min_y * 2 then
+		p.y = self.boundary_max_y * 2
+	elseif p.y >= self.boundary_max_y * 2 then
+		p.y = self.boundary_min_y * 2
+	end
+
+	-- set position
+	go.set_position(p)
+end

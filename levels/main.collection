@@ -90,7 +90,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"factory-1\"\n"
   "  type: \"collectionfactory\"\n"
-  "  data: \"prototype: \\\"/levels/level-1.collection\\\"\\n"
+  "  data: \"prototype: \\\"/levels/level-1/level-1.collection\\\"\\n"
   "load_dynamically: true\\n"
   "\"\n"
   "  position {\n"

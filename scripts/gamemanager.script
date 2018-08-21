@@ -53,7 +53,7 @@ function load_level(self, level)
 	go.set_position(player_start_position, "/player")
 
 	-- update gui
-	-- ...
+	msg.post("/gui#game", "enable")
 end
 
 ---- Functions
