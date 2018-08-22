@@ -26,6 +26,7 @@ function init(self)
 	self.moving = false
 	self.firing = false 
 	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
+	self.started = false
 	
 	-- Animate the ship so it's swaying back and forth
 	go.set(".", "euler.z", -self.sway)
@@ -72,7 +73,7 @@ function on_input(self, action_id, action)
 		self.dir.x = -1
 	elseif action_id == hash("right") then
 		self.dir.x = 1
-	elseif action_id == hash("fire") and action.pressed then
+	elseif action_id == hash("fire") and action.pressed and self.started == true then
 		self.firing = true
 	end
 
@@ -85,7 +86,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_level") then
-		print("start level")
+		self.started = true
 		-- enable self
 		msg.post(".", "enable")
 		-- reset player location		

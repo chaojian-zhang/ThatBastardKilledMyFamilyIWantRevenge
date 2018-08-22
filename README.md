@@ -1,4 +1,4 @@
-# ThatBastardKilledMyFamilySoIWantRevenge
+# That Bastard Killed My Family I Want Revenge
 
 Welcome! This contains brief documentation of the project.
 
