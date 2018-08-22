@@ -1,7 +1,5 @@
 -- Handles message; Communicates with GUI; Does level loading
 
-local player_start_position = vmath.vector3(0, 0, 0);
-
 ---- Core
 function init(self)
 	self.current_level = nil
@@ -49,8 +47,8 @@ function load_level(self, level)
 	-- the spawed next level is set as new current level
 	self.current_screen = next_level
 
-	-- reset player location
-	go.set_position(player_start_position, "/player")
+	-- enable player 
+	msg.post("player", "start_level")
 
 	-- update gui
 	msg.post("/gui#game", "enable")
