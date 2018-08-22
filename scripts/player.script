@@ -6,13 +6,15 @@
 --	- 
 
 go.property("game_manager", msg.url("#"))
-go.property("player_start_position", vmath.vector3(360, 0, 0))
+-- go.property("player_start_position", vmath.vector3(360, 0, 0))
 go.property("max_movement_speed", 200)
 go.property("min_boundary_x", 10)	-- This should be related to display size
 go.property("max_boundary_x", 710)	-- This should be related to display size
 go.property("min_boundary_y", 10)	-- This should be related to display size
 go.property("max_boundary_y", 1270)	-- This should be related to display size
 go.property("sway", 5)
+go.property("current_weapon", msg.url("#simple_bullet_factory"))
+go.property("firing_offset_position", vmath.vector3())
 
 function init(self)
 	-- Let the script receive input from the player
@@ -22,7 +24,8 @@ function init(self)
 	-- the current speed (and direction) of the space ship
 	self.dir = vmath.vector3()
 	self.moving = false
-	self.firing = false
+	self.firing = false 
+	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
 	
 	-- Animate the ship so it's swaying back and forth
 	go.set(".", "euler.z", -self.sway)
@@ -50,12 +53,14 @@ function update(self, dt)
 		local angle = math.atan2(self.dir.y, self.dir.x)    -- Andle in radians
 		local rot = vmath.quat_rotation_z(angle)            -- factory.create expects a quat
 		-- Usually bullet direction is straight up and not relavent to orientation
-		-- factory.create("#rocketfactory", nil, rot, { dir = self.dir })
+		-- factory.create(self.current_weapon, self.firing_offset_position + go.get_position(), vmath.quat_rotation_z(0), { dir = self.dir })
+		factory.create(self.current_weapon, self.firing_offset_position + go.get_position())
 	end
 
 	-- Reset inputs
 	self.moving = false
 	self.dir = vmath.vector3()
+	self.firing = false
 end
 
 function on_input(self, action_id, action)
@@ -80,10 +85,11 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_level") then
+		print("start level")
 		-- enable self
-		msg.post("player", "enable")
+		msg.post(".", "enable")
 		-- reset player location		
-		go.set_position(self.player_start_position, "/player")
+		go.set_position(self.player_start_position)
 		-- play level entrance animation
 		go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, 150, go.EASING_OUTCUBIC, 1.25)	-- Easing Options: https://www.defold.com/manuals/animation/
 	end

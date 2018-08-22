@@ -1,0 +1,22 @@
+images {
+  image: "/assets/fx/laser/yellow-laser.png"
+}
+animations {
+  id: "rocket"
+  images {
+    image: "/assets/buildings/turret-rocket/1.png"
+  }
+  images {
+    image: "/assets/buildings/turret-rocket/2.png"
+  }
+  images {
+    image: "/assets/buildings/turret-rocket/3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

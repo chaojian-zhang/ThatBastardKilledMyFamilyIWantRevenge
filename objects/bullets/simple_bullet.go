@@ -1,6 +1,6 @@
 components {
-  id: "script"
-  component: "/scripts/player.script"
+  id: "simple_bullet"
+  component: "/scripts/simple_bullet.script"
   position {
     x: 0.0
     y: 0.0
@@ -21,14 +21,14 @@ embedded_components {
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"default\"\n"
-  "mask: \"default\"\n"
+  "group: \"rockets\"\n"
+  "mask: \"tanks\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
-  "    shape_type: TYPE_SPHERE\n"
+  "    shape_type: TYPE_BOX\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: -6.287068\n"
+  "      y: 0.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -38,9 +38,11 @@ embedded_components {
   "      w: 1.0\n"
   "    }\n"
   "    index: 0\n"
-  "    count: 1\n"
+  "    count: 3\n"
   "  }\n"
-  "  data: 28.0\n"
+  "  data: 3.214\n"
+  "  data: 5.3375\n"
+  "  data: 10.0\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
@@ -61,28 +63,10 @@ embedded_components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/assets/atlas/spaceship.atlas\"\n"
-  "default_animation: \"spin\"\n"
+  data: "tile_set: \"/assets/atlas/effect.atlas\"\n"
+  "default_animation: \"yellow-laser\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
-  ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-embedded_components {
-  id: "simple_bullet_factory"
-  type: "factory"
-  data: "prototype: \"/objects/bullets/simple_bullet.go\"\n"
-  "load_dynamically: false\n"
   ""
   position {
     x: 0.0
