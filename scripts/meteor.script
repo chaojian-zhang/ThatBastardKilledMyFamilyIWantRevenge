@@ -1,0 +1,57 @@
+-- Meteors are placed in the scene with initial positions by scene designers
+-- Meteors have an explode_sound component
+
+go.property("type", hash("stone"))		-- Select from: stone or treasure; Stone breaks down, treasure reveals pickup
+go.property("velocity", vmath.vector3())
+go.property("max_distance", 1600)		-- max distance the meteor will travel in diagonal direction
+
+function init(self)
+	-- random rotation
+	local r = (math.random() - 0.5) * 3.1415
+	self.rot = vmath.quat_rotation_z(r)
+	self.distance = 0
+end
+
+function update(self, dt)
+	-- rotational animation
+	local r = go.get_rotation()
+	r = vmath.slerp(dt, r, r * self.rot)
+	go.set_rotation(r)
+
+	-- floating animation
+	local p = go.get_position() + self.velocity * dt
+	go.set_position(p)
+
+	-- self-destruction outside screen
+	self.distance = self.distance + vmath.length(self.velocity) * dt
+	if self.distance > self.max_distance then
+		go.delete()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") and self.distance < self.max_distance then
+		msg.post("#explode_sound", "play_sound")
+		-- Don't delete yet for testing go.delete()
+		self.distance = max_distance -- to prevent more than one collision response
+
+		-- depending on type of current meteor we have special effects for it
+		--[[
+		if self.type == hash("large") then
+			-- split into two small meteors
+			local p1 = vmath.vector3()
+			local p2 = vmath.vector3()
+			p1.x = -self.velocity.y
+			p1.y = self.velocity.x
+			p2.x = self.velocity.y
+			p2.y = -self.velocity.x
+			-- scale offset vectors
+			local o1 = p1 * (math.random() / 15 + 0.15)
+			local o2 = p2 * (math.random() / 15 + 0.15)
+			local pos = go.get_position()
+			factory.create("#factory", pos + o1, nil, { velocity = self.velocity + o1 })
+			factory.create("#factory", pos + o2, nil, { velocity = self.velocity + o2 })
+		end
+		--]]
+	end
+end

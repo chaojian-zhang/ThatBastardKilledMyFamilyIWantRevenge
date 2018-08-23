@@ -19,6 +19,10 @@ The inputs we are dealing with are mainly keyboard buttons and touch and click.
 
 Players control their aircraft moving within viewable screen area. The aircrafts physical location doesn't exceed viewable boundary. Instead, the whole level scrolls down along with everything in it. Thus **levels need to have a blank root object** so it's parent of everything else in the level when it's loaded.
 
+## Enemies
+
+Enemies are defined by movement patterns and attack modes, each controlled by a separate script (defined separate properties; being as light-weight as possible); For more advanced enemies they might be controlled by one dedicated script.
+
 # Git Workflow
 
 This folder will be shared among programmers and artists. For efficient and conflict free team development, follow below guidalines:
@@ -61,3 +65,11 @@ This folder will be shared among programmers and artists. For efficient and conf
 9. Right click the root "Game Object" item in the *Outline* view again and select <kbd>Add Component File</kbd>, then select the script file "bonus_star.script". This script moves the bonus stars and make sure the player gets the right amount of points for catching them.
 10. Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
 11. Happy Defolding!
+
+# Attributes
+
+This game is powered by Defold game engine. Some assets are taken from tutorial and examples files.
+
+Gratitudes to those individuals without whom this work will never be completed.
+- Kenney Vleugels (www.kenney.nl) License (CC0): Space Shooter (Redux, plus fonts and sounds)
+- 

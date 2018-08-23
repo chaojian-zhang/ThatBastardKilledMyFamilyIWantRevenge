@@ -16,7 +16,7 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/assets/atlas/stars.atlas\"\n"
+  data: "tile_set: \"/assets/atlas/pickups.atlas\"\n"
   "default_animation: \"bonus_star\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"

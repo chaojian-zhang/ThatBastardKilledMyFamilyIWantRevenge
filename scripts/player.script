@@ -3,7 +3,7 @@
 --	- start_level: used in starting a level, play start level animation
 --	- fire: start firing
 --	- cease_fire: stop firing
---	- 
+--	- update_weapon [weapon_url, weapon_damage, cool_down]: update weapon cool down
 
 go.property("game_manager", msg.url("#"))
 -- go.property("player_start_position", vmath.vector3(360, 0, 0))
@@ -14,8 +14,30 @@ go.property("min_boundary_y", 10)	-- This should be related to display size
 go.property("max_boundary_y", 1270)	-- This should be related to display size
 go.property("sway", 5)
 go.property("current_weapon", msg.url("#simple_bullet_factory"))
+go.property("current_weapon_cooldown", 0.12)
 go.property("firing_offset_position", vmath.vector3())
 
+--- local function
+local function attempt_fire(self)
+	-- if weapon_cooldown has not reached then don't fire
+	if self.weapon_cooldown > 0 then
+		return
+	end 
+
+	-- play sound once
+	msg.post("#fire_sound", "play_sound")
+
+	-- Fire weapon once
+	local angle = math.atan2(self.dir.y, self.dir.x)    -- Angle in radians
+	local rot = vmath.quat_rotation_z(angle)            -- factory.create expects a quat
+	-- Usually bullet direction is straight up and not relavent to orientation
+	-- factory.create(self.current_weapon, self.firing_offset_position + go.get_position(), vmath.quat_rotation_z(0), { dir = self.dir })
+	factory.create(self.current_weapon, self.firing_offset_position + go.get_position())
+
+	self.weapon_cooldown = self.current_weapon_cooldown
+end
+
+--- runtime events
 function init(self)
 	-- Let the script receive input from the player
 	msg.post(".", "acquire_input_focus")
@@ -24,9 +46,9 @@ function init(self)
 	-- the current speed (and direction) of the space ship
 	self.dir = vmath.vector3()
 	self.moving = false
-	self.firing = false 
 	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
 	self.started = false
+	self.weapon_cooldown = 0	-- Controls weapon cool down and also firing weapon sound gating
 	
 	-- Animate the ship so it's swaying back and forth
 	go.set(".", "euler.z", -self.sway)
@@ -49,19 +71,12 @@ function update(self, dt)
 		go.set_position(pos)
 	end
 
-	-- Fire rockets
-	if self.firing then
-		local angle = math.atan2(self.dir.y, self.dir.x)    -- Andle in radians
-		local rot = vmath.quat_rotation_z(angle)            -- factory.create expects a quat
-		-- Usually bullet direction is straight up and not relavent to orientation
-		-- factory.create(self.current_weapon, self.firing_offset_position + go.get_position(), vmath.quat_rotation_z(0), { dir = self.dir })
-		factory.create(self.current_weapon, self.firing_offset_position + go.get_position())
-	end
+	-- Decrement timings
+	self.weapon_cooldown = self.weapon_cooldown - dt
 
 	-- Reset inputs
 	self.moving = false
 	self.dir = vmath.vector3()
-	self.firing = false
 end
 
 function on_input(self, action_id, action)
@@ -73,8 +88,10 @@ function on_input(self, action_id, action)
 		self.dir.x = -1
 	elseif action_id == hash("right") then
 		self.dir.x = 1
-	elseif action_id == hash("fire") and action.pressed and self.started == true then
-		self.firing = true
+	elseif action_id == hash("fire") and self.started == true then -- notice we are not checking action.pressed so it automatically handles continuous firing
+		attempt_fire(self)
+	elseif action_id == hash("touch") or action_id == hash("click") and self.started == true then
+		attempt_fire(self)
 	end
 
 	-- normalize

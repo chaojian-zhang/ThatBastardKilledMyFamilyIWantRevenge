@@ -5,10 +5,13 @@
 -- - Spread/Single: 
 -- - Continuous/Slow: determined by firing frequency
 
-go.property("speed", 200)
+go.property("speed", 800)
 go.property("life", 10)					-- For long-lasting weapons there is no termination life; Otherwise use 1 second
 go.property("frequency", 10)
+go.property("max_distance", 1600)		-- Usually this is disgonal display distance
+go.property("damage", 1)
 
+--- Actions
 local function explode(self)
 	self.life = 1000
 	go.set_rotation(vmath.quat())
@@ -16,14 +19,27 @@ local function explode(self)
 	msg.post("#sprite", "play_animation", { id = hash("explosion") })
 end
 
+-- runtime events
+function init(self)
+	-- rotate the velocity vector to our orientation.
+	self.velocity = vmath.rotate(go.get_rotation(), vmath.vector3(0, 1, 0))
+	self.distance = 0
+end
+
 function update(self, dt)
 	local pos = go.get_position()
-	pos = pos + vmath.vector3(0 ,1, 0) * self.speed * dt
+	pos = pos + self.velocity * self.speed * dt
 	go.set_position(pos)
 
 	self.life = self.life - dt
 	if self.life < 0 then
 		explode(self)
+	end
+
+	self.distance = self.distance + self.speed * dt
+	if self.distance > self.max_distance then
+		-- delete the shot when it has travelled off screen.
+		go.delete()
 	end
 end
 
@@ -33,8 +49,10 @@ function on_message(self, message_id, message, sender)
 	go.delete()                                
 elseif message_id == hash("collision_response") then
 	explode(self)
-	go.delete(message.other_id)
-	msg.post("/gui#ui", "add_score", { score = 100 }) -- Post a message named "add_score" to the component "ui" 
-	-- in the game object named "gui" at the root of the main collection
-end	
+	msg.post("main#gui", "add_score", {amount = score})
+	particlefx.play("#pickup")
+	msg.post(message.other_id, "take_damage", {damage = self.damage}) -- go.delete(message.other_id)
+	-- msg.post("/gui#ui", "add_score", { score = 100 }) -- Post a message named "add_score" to the component "ui" in the game object named "gui" at the root of the main collection
+	go.delete()
+	end	
 end

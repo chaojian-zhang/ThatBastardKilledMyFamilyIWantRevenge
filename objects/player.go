@@ -12,6 +12,16 @@ components {
     z: 0.0
     w: 1.0
   }
+  properties {
+    id: "sway"
+    value: "3.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
+  properties {
+    id: "firing_offset_position"
+    value: "0.0, 55.0, 0.0"
+    type: PROPERTY_TYPE_VECTOR3
+  }
 }
 embedded_components {
   id: "collisionobject"
@@ -61,8 +71,8 @@ embedded_components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/assets/atlas/spaceship.atlas\"\n"
-  "default_animation: \"spin\"\n"
+  data: "tile_set: \"/assets/atlas/aircrafts.atlas\"\n"
+  "default_animation: \"space_shuttle_idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
@@ -83,6 +93,26 @@ embedded_components {
   type: "factory"
   data: "prototype: \"/objects/bullets/simple_bullet.go\"\n"
   "load_dynamically: false\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "fire_sound"
+  type: "sound"
+  data: "sound: \"/assets/sounds/sfx_laser.ogg\"\n"
+  "looping: 0\n"
+  "group: \"master\"\n"
+  "gain: 0.2\n"
   ""
   position {
     x: 0.0

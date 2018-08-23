@@ -1,0 +1,9 @@
+images {
+  image: "/assets/units/barrier/roid-large.png"
+}
+images {
+  image: "/assets/units/barrier/roid-small.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

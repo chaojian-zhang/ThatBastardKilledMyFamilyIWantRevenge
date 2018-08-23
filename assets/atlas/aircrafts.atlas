@@ -1,5 +1,5 @@
 animations {
-  id: "spin"
+  id: "spaceship"
   images {
     image: "/assets/units/spaceship/spaceship_00.png"
   }
@@ -29,6 +29,29 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "spaceshuttle_thrust"
+  images {
+    image: "/assets/units/spaceship/ship-1.png"
+  }
+  images {
+    image: "/assets/units/spaceship/ship-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "space_shuttle_idle"
+  images {
+    image: "/assets/units/spaceship/ship-0.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
   flip_horizontal: 0
   flip_vertical: 0
 }

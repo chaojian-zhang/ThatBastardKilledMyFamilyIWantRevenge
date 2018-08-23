@@ -1,45 +1,5 @@
 name: "default"
 instances {
-  id: "flying_small_planets"
-  prototype: "/levels/level-1/flying_small_planets.go"
-  position {
-    x: 179.0
-    y: 717.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 0.3
-    y: 0.3
-    z: 0.3
-  }
-}
-instances {
-  id: "flying_small_planets_2"
-  prototype: "/levels/level-1/flying_small_planets.go"
-  position {
-    x: 501.0
-    y: 1643.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 0.3
-    y: 0.3
-    z: 0.3
-  }
-}
-instances {
   id: "flying_large_planets1"
   prototype: "/levels/level-1/flying_large_planets.go"
   position {
@@ -80,6 +40,46 @@ instances {
   }
 }
 instances {
+  id: "flying_small_planets"
+  prototype: "/levels/level-1/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 717.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_2"
+  prototype: "/levels/level-1/flying_small_planets.go"
+  position {
+    x: 501.0
+    y: 1643.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
   id: "flying_small_planets_3"
   prototype: "/levels/level-1/flying_small_planets.go"
   position {
@@ -99,16 +99,153 @@ instances {
     z: 0.3
   }
 }
+instances {
+  id: "meteor"
+  prototype: "/objects/barriers/meteor.go"
+  position {
+    x: -9.0
+    y: 931.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "35.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor1"
+  prototype: "/objects/barriers/meteor.go"
+  position {
+    x: 237.0
+    y: 1710.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "35.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor2"
+  prototype: "/objects/barriers/meteor.go"
+  position {
+    x: 188.0
+    y: 1526.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "35.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor3"
+  prototype: "/objects/barriers/meteor.go"
+  position {
+    x: 139.0
+    y: 1334.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "35.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor4"
+  prototype: "/objects/barriers/meteor.go"
+  position {
+    x: 72.0
+    y: 1123.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "35.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "root"
   children: "background"
-  children: "flying_large_planets1"
-  children: "flying_large_planets2"
-  children: "flying_small_planets"
-  children: "flying_small_planets_2"
-  children: "flying_small_planets_3"
-  children: "stars_random_generator"
+  children: "barriers"
+  children: "flying_background_elements"
+  children: "testing"
   data: ""
   position {
     x: 0.0
@@ -164,6 +301,77 @@ embedded_instances {
   scale3 {
     x: 2.0
     y: 2.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "flying_background_elements"
+  children: "flying_large_planets1"
+  children: "flying_large_planets2"
+  children: "flying_small_planets"
+  children: "flying_small_planets_2"
+  children: "flying_small_planets_3"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "barriers"
+  children: "meteor"
+  children: "meteor1"
+  children: "meteor2"
+  children: "meteor3"
+  children: "meteor4"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "testing"
+  children: "stars_random_generator"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
     z: 1.0
   }
 }
