@@ -8,6 +8,19 @@ local function animation_stage_2_finished(self, node)
 	local startButton = gui.get_node("start_button")
 	gui.set_enabled(startButton, true)
 
+	-- Do some crazy animation on it
+	local values = { 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 1,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 1,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 1,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 1 }
+	local vec = vmath.vector(values)
+	-- gui.animate(gui.get_node("start_text"), "color.w", 0, gui.EASING_INBACK, 4.0, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+	gui.animate(gui.get_node("start_text"), "color.w", 0, vec, 4.0, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+
 	-- Now, acquire input. Due to timing, we're gonna be on top of the input stack.
 	msg.post(".", "acquire_input_focus")
 end
