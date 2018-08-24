@@ -109,6 +109,6 @@ function on_message(self, message_id, message, sender)
 		-- reset player location		
 		go.set_position(self.player_start_position)
 		-- play level entrance animation
-		go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, 150, go.EASING_OUTCUBIC, 1.25)	-- Easing Options: https://www.defold.com/manuals/animation/
+		go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, 150, go.EASING_OUTCUBIC, 1.25)
 	end
 end

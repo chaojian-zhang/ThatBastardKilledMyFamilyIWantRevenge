@@ -1,6 +1,41 @@
 -- Handles message; Communicates with GUI; Does level loading
 
----- Core
+-- References
+go.property("game_gui", msg.url("/gui#game"))
+go.property("player_factory", msg.url("/player#factory"))
+
+---- Facilities
+local function load_level(self, level)
+	-- which level to load
+	local f = "/levels#factory-" .. level
+	-- where should the level be spawned?
+	local p = vmath.vector3()
+	-- spawn the level
+	local next_level = collectionfactory.create(f, p)
+
+	-- unload: level transition effect can go here...
+	if self.current_level then
+		go.delete(self.current_screen)
+	end
+	-- the spawed next level is set as new current level
+	self.current_screen = next_level
+
+	-- create and enable player 
+	self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
+	msg.post(self.player, "start_level")
+
+	-- update gui
+	if level > 1 then
+		msg.post(self.game_gui, "enable")
+	end
+end
+
+---- Functions
+local function start_game(self)
+
+end
+
+---- Core Events
 function init(self)
 	self.current_level = nil
 end
@@ -29,32 +64,4 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
-end
-
----- Facilities
-function load_level(self, level)
-	-- which level to load
-	local f = "/levels#factory-" .. level
-	-- where should the level be spawned?
-	local p = vmath.vector3()
-	-- spawn the level
-	local next_level = collectionfactory.create(f, p)
-
-	-- unload: level transition effect can go here...
-	if self.current_level then
-		go.delete(self.current_screen)
-	end
-	-- the spawed next level is set as new current level
-	self.current_screen = next_level
-
-	-- enable player 
-	msg.post("player", "start_level")
-
-	-- update gui
-	msg.post("/gui#game", "enable")
-end
-
----- Functions
-function start_game(self)
-	
 end

@@ -1,9 +1,10 @@
 -- Meteors are placed in the scene with initial positions by scene designers
 -- Meteors have an explode_sound component
 
-go.property("type", hash("stone"))		-- Select from: stone or treasure; Stone breaks down, treasure reveals pickup
+go.property("type", hash("stony"))		-- Select from: stony, breakable or treasurable; Stony doesn't break, breakable breaks down, treasure reveals pickup; Different types should loook diffrent
 go.property("velocity", vmath.vector3())
 go.property("max_distance", 1600)		-- max distance the meteor will travel in diagonal direction
+go.property("activation_range", 1600)	-- how close to player should this object beging moving
 
 function init(self)
 	-- random rotation
@@ -32,8 +33,8 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") and self.distance < self.max_distance then
 		msg.post("#explode_sound", "play_sound")
-		-- Don't delete yet for testing go.delete()
-		self.distance = max_distance -- to prevent more than one collision response
+		-- go.delete() -- Don't delete yet for testing 
+		-- self.distance = self.max_distance -- to prevent more than one collision response
 
 		-- depending on type of current meteor we have special effects for it
 		--[[

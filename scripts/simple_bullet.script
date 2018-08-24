@@ -10,6 +10,7 @@ go.property("life", 10)					-- For long-lasting weapons there is no termination 
 go.property("frequency", 10)
 go.property("max_distance", 1600)		-- Usually this is disgonal display distance
 go.property("damage", 1)
+go.property("game_gui", msg.url("main#gui"))
 
 --- Actions
 local function explode(self)
@@ -45,14 +46,14 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("animation_done") then  -- This message is sent to the sender of a "play_animation" message on sprite:
-	--  when the animation has completed
-	go.delete()                                
-elseif message_id == hash("collision_response") then
-	explode(self)
-	msg.post("main#gui", "add_score", {amount = score})
-	particlefx.play("#pickup")
-	msg.post(message.other_id, "take_damage", {damage = self.damage}) -- go.delete(message.other_id)
-	-- msg.post("/gui#ui", "add_score", { score = 100 }) -- Post a message named "add_score" to the component "ui" in the game object named "gui" at the root of the main collection
-	go.delete()
+		--  when the animation has completed
+		go.delete()                                
+	elseif message_id == hash("collision_response") then
+		-- explode(self)
+		-- msg.post(self.game_gui, "add_score", {amount = score})
+		particlefx.play("#pickup")
+		msg.post(message.other_id, "take_damage", {damage = self.damage}) -- go.delete(message.other_id)
+		-- msg.post("/gui#ui", "add_score", { score = 100 }) -- Post a message named "add_score" to the component "ui" in the game object named "gui" at the root of the main collection
+		go.delete()
 	end	
 end
