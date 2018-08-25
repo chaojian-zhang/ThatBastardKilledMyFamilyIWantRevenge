@@ -4,6 +4,15 @@ images {
 images {
   image: "/assets/units/barrier/roid-small.png"
 }
+images {
+  image: "/assets/units/barrier/roid-asteroid.png"
+}
+images {
+  image: "/assets/units/barrier/roid-futuristic.png"
+}
+images {
+  image: "/assets/units/barrier/roid-treasure.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0

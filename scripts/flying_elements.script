@@ -1,8 +1,8 @@
 -- This script provides an interface
 -- Attach this script to any game object and that game object will be animated
 
-go.property("x_speed", 0)
-go.property("y_speed", -60)
+go.property("x_speed", 0)				-- additional speed
+go.property("y_speed", 0)				-- additional speed
 go.property("boundary_min_x", -720)		-- This size should match display size
 go.property("boundary_max_x", 720)		-- This size should match display size
 go.property("boundary_min_y", -1280)	-- This size should match display size

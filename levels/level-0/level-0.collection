@@ -1,10 +1,10 @@
 name: "default"
 instances {
-  id: "meteor"
-  prototype: "/objects/barriers/meteor.go"
+  id: "meteor_asteroid"
+  prototype: "/objects/barriers/meteor_asteroid.go"
   position {
-    x: -9.0
-    y: 931.0
+    x: 130.0
+    y: 1684.0
     z: 0.0
   }
   rotation {
@@ -12,14 +12,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "meteor"
-    properties {
-      id: "velocity"
-      value: "35.0, -20.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0
@@ -28,11 +20,11 @@ instances {
   }
 }
 instances {
-  id: "meteor1"
-  prototype: "/objects/barriers/meteor.go"
+  id: "meteor_large"
+  prototype: "/objects/barriers/meteor_large.go"
   position {
-    x: 237.0
-    y: 1710.0
+    x: 520.0
+    y: 2130.0
     z: 0.0
   }
   rotation {
@@ -40,14 +32,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "meteor"
-    properties {
-      id: "velocity"
-      value: "35.0, -20.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0
@@ -56,11 +40,11 @@ instances {
   }
 }
 instances {
-  id: "meteor2"
-  prototype: "/objects/barriers/meteor.go"
+  id: "meteor_small"
+  prototype: "/objects/barriers/meteor_small.go"
   position {
-    x: 188.0
-    y: 1526.0
+    x: 190.0
+    y: 2697.0
     z: 0.0
   }
   rotation {
@@ -68,14 +52,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "meteor"
-    properties {
-      id: "velocity"
-      value: "35.0, -20.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0
@@ -84,11 +60,11 @@ instances {
   }
 }
 instances {
-  id: "meteor3"
-  prototype: "/objects/barriers/meteor.go"
+  id: "meteor_stony"
+  prototype: "/objects/barriers/meteor_stony.go"
   position {
-    x: 139.0
-    y: 1334.0
+    x: 91.0
+    y: 2243.0
     z: 0.0
   }
   rotation {
@@ -96,14 +72,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "meteor"
-    properties {
-      id: "velocity"
-      value: "35.0, -20.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0
@@ -112,11 +80,11 @@ instances {
   }
 }
 instances {
-  id: "meteor4"
-  prototype: "/objects/barriers/meteor.go"
+  id: "meteor_treasure"
+  prototype: "/objects/barriers/meteor_treasure.go"
   position {
-    x: 72.0
-    y: 1123.0
+    x: 37.0
+    y: 1035.0
     z: 0.0
   }
   rotation {
@@ -124,14 +92,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "meteor"
-    properties {
-      id: "velocity"
-      value: "35.0, -20.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0
@@ -242,11 +202,10 @@ instances {
 scale_along_z: 0
 embedded_instances {
   id: "root"
-  children: "background_animations_layer"
   children: "background_layer"
-  children: "background_tiles_layers"
-  children: "enemies_layer"
   children: "environment_layer"
+  children: "level_animation"
+  children: "testing"
   data: ""
   position {
     x: 0.0
@@ -268,7 +227,7 @@ embedded_instances {
 embedded_instances {
   id: "background_layer"
   data: "embedded_components {\n"
-  "  id: \"sprite\"\n"
+  "  id: \"background_sprite\"\n"
   "  type: \"sprite\"\n"
   "  data: \"tile_set: \\\"/assets/atlas/background.atlas\\\"\\n"
   "default_animation: \\\"bg\\\"\\n"
@@ -306,49 +265,8 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "background_tiles_layers"
-  data: ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "background_animations_layer"
-  data: ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
   id: "environment_layer"
   children: "barriers"
-  children: "flying_background_elements"
   data: ""
   position {
     x: 0.0
@@ -369,11 +287,6 @@ embedded_instances {
 }
 embedded_instances {
   id: "barriers"
-  children: "meteor"
-  children: "meteor1"
-  children: "meteor2"
-  children: "meteor3"
-  children: "meteor4"
   data: ""
   position {
     x: 0.0
@@ -393,38 +306,36 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "enemies_layer"
-  children: "testing"
-  data: ""
+  id: "level_animation"
+  children: "background_animations_layer"
+  children: "background_tiles_layers"
+  children: "enemies_layer"
+  children: "flying_background_elements"
+  data: "components {\n"
+  "  id: \"level_animator\"\n"
+  "  component: \"/scripts/level_animator.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"level_speed\"\n"
+  "    value: \"60.0\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "}\n"
+  ""
   position {
     x: 0.0
     y: 0.0
     z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "flying_background_elements"
-  children: "flying_large_planets1"
-  children: "flying_large_planets2"
-  children: "flying_small_planets"
-  children: "flying_small_planets_2"
-  children: "flying_small_planets_3"
-  data: ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: -0.1
   }
   rotation {
     x: 0.0
@@ -527,6 +438,117 @@ embedded_instances {
     x: 0.0
     y: 0.0
     z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "enemies_layer"
+  children: "meteors"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors"
+  children: "meteor_asteroid"
+  children: "meteor_large"
+  children: "meteor_small"
+  children: "meteor_stony"
+  children: "meteor_treasure"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "background_tiles_layers"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "background_animations_layer"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "flying_background_elements"
+  children: "flying_large_planets1"
+  children: "flying_large_planets2"
+  children: "flying_small_planets"
+  children: "flying_small_planets_2"
+  children: "flying_small_planets_3"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: -0.1
   }
   rotation {
     x: 0.0

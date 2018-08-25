@@ -12,6 +12,11 @@ components {
     z: 0.0
     w: 1.0
   }
+  properties {
+    id: "type"
+    value: "large"
+    type: PROPERTY_TYPE_HASH
+  }
 }
 embedded_components {
   id: "collisionobject"
@@ -40,31 +45,11 @@ embedded_components {
   "    index: 0\n"
   "    count: 1\n"
   "  }\n"
-  "  data: 72.93\n"
+  "  data: 83.634\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
   "locked_rotation: false\n"
-  ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-embedded_components {
-  id: "explode"
-  type: "sound"
-  data: "sound: \"/assets/sounds/sfx_explosion2.ogg\"\n"
-  "looping: 0\n"
-  "group: \"master\"\n"
-  "gain: 1.0\n"
   ""
   position {
     x: 0.0
@@ -85,6 +70,26 @@ embedded_components {
   "default_animation: \"roid-large\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "minor_explode_sound"
+  type: "sound"
+  data: "sound: \"/assets/sounds/sfx_meteor_explosion_01.ogg\"\n"
+  "looping: 0\n"
+  "group: \"master\"\n"
+  "gain: 0.6\n"
   ""
   position {
     x: 0.0

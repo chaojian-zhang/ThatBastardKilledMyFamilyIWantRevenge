@@ -1,19 +1,135 @@
--- Meteors are placed in the scene with initial positions by scene designers
--- Meteors have an explode_sound component
+--[[
+Meteors are placed in the scene with initial positions by scene designers
 
-go.property("type", hash("stony"))		-- Select from: stony, breakable or treasurable; Stony doesn't break, breakable breaks down, treasure reveals pickup; Different types should loook diffrent
+There are four types of meteors, each having different behavior and sound effects and visuals; All controlled by the same generic script (i.e. this one):
+(In order of appearance)
+- hash(treasure): Gold, contains treasures, Reveals pickup
+- hash(small): Grey, one shot break down, pop explode sound
+- hash(large): One shot break into (random number of) smallhash(small)
+- hash(asteroid): Multi shot explosion, distant grenade sound
+- hash(stony): Non-breakable, will not collide with player but will block weapon
+
+Game Object Components
+- Meteors have an major_explode_sound, minor_explode_sound, shell_bullet_sound, treasure_sound components
+- Meteors should be placed in an "enemy" collision layer, with "player" collision layer as mask (for collision to respond properly)
+- Meteors might have an animation sprite component in the future for explosion effects (e.g. floating in the air and show cracks, at least for the hash(s)asteroid) type)
+
+This Game Object responds to such external messages (i.e. non-internal messages e.g. collision)
+- None
+
+Setup Requirements
+- Require a url("/player") game object (not necessarily the game script) at current root
+
+--]]
+
+-- Game object properties
+go.property("type", hash("stony"))
 go.property("velocity", vmath.vector3())
-go.property("max_distance", 1600)		-- max distance the meteor will travel in diagonal direction
-go.property("activation_range", 1600)	-- how close to player should this object beging moving
+go.property("activation_range", 1600)			-- how close to player should this object beging moving
+go.property("treasure_factory", msg.url("#factoryName"))
 
+-- local handler functions
+local function treasure_explode(self)
+	-- play explode sound
+	msg.post("#treasure_sound", "play_sound")
+	-- spawn treasure
+	-- ...
+	-- terminate self
+	self.terminated = true 
+end
+
+local function small_explode(self)
+	-- play explode sound
+	msg.post("#minor_explode_sound", "play_sound")
+	-- terminate self
+	self.terminated = true 
+end
+
+local function large_explode(self)
+	-- play explode sound
+	msg.post("#minor_explode_sound", "play_sound")
+	
+	-- split into two small meteors
+	local p1 = vmath.vector3()
+	local p2 = vmath.vector3()
+	p1.x = -self.velocity.y
+	p1.y = self.velocity.x
+	p2.x = self.velocity.y
+	p2.y = -self.velocity.x
+	-- scale offset vectors
+	local o1 = p1 * (math.random() / 15 + 0.15)
+	local o2 = p2 * (math.random() / 15 + 0.15)
+	local pos = go.get_position()
+	factory.create("#factory", pos + o1, nil, { velocity = self.velocity + o1 })
+	factory.create("#factory", pos + o2, nil, { velocity = self.velocity + o2 })
+	
+	-- terminate self
+	self.terminated = true 
+end
+
+local function asteroid_explode(self)
+	self.damage = self.damage + 1
+	
+	if self.damage >= self.max_damage then
+		-- play explode sound
+		msg.post("#majorexplode_sound", "play_sound")
+		
+		-- terminate self
+		self.terminated = true 
+	end
+end
+
+local function stony_impact(self)
+	msg.post("shell_bullet_sound", "play_sound")
+end
+
+-- core events
 function init(self)
+	-- caculate max travel distance
+	-- local w = tonumber(sys.get_config("display.width"))
+	-- local h = tonumber(sys.get_config("display.height"))
+	-- self.max_distance = math.sqrt(w*w + h*h)	-- max distance the meteor will travel in diagonal direction
+	
 	-- random rotation
 	local r = (math.random() - 0.5) * 3.1415
-	self.rot = vmath.quat_rotation_z(r)
-	self.distance = 0
+	self.rot = vmath.quat_rotation_z(r)			-- random rotation quaternoin
+	self.distance = 0							-- current travelled distance since activation
+	self.activated = false						-- don't activate the meteor until it's close enoguh to the player
+	self.terminated = false						-- used for termination animations and sound effects
+
+	-- damage calculation
+	self.max_damage = 10
+	self.damage = 0
 end
 
 function update(self, dt)
+	if self.terminated == true then 
+		return 
+	end
+	
+	if self.activated == false then
+		print "check activation"
+		-- check whether we are close enough to activate ourself
+		local player_pos = go.get_position("/player")
+		local my_pos = go.get_position()
+		local current_distance = vmath.length(my_pos - player_pos) 
+		-- If we are close enough, activate ourself
+		if current_distance < self.activation_range then
+			print "activated"
+			self.activated = true
+		-- otherwise return
+		else
+			return
+		end
+	end
+
+	-- Just to make sure
+	if self.activated == false then 
+		return 
+	end
+
+	print "flying around"
+	
 	-- rotational animation
 	local r = go.get_rotation()
 	r = vmath.slerp(dt, r, r * self.rot)
@@ -24,35 +140,47 @@ function update(self, dt)
 	go.set_position(p)
 
 	-- self-destruction outside screen
-	self.distance = self.distance + vmath.length(self.velocity) * dt
-	if self.distance > self.max_distance then
+	-- self.distance = self.distance + vmath.length(self.velocity) * dt
+	-- if self.distance > self.max_distance then
+		-- go.delete()
+	-- end
+	if go.get_position().y < 0 then
+		print "terminated"
+		self.terminated = true
 		go.delete()
 	end
 end
 
-function on_message(self, message_id, message, sender)
-	if message_id == hash("collision_response") and self.distance < self.max_distance then
-		msg.post("#explode_sound", "play_sound")
-		-- go.delete() -- Don't delete yet for testing 
-		-- self.distance = self.max_distance -- to prevent more than one collision response
-
+function on_message(self, message_id, message, sender)	
+	if self.terminated == true then 
+		return 
+	end
+	
+	if self.activated == false then 
+		return 
+	end
+	
+	-- If we collide with anything belong to the "player" collision layer
+	if message_id == hash("collision_response") then
 		-- depending on type of current meteor we have special effects for it
-		--[[
-		if self.type == hash("large") then
-			-- split into two small meteors
-			local p1 = vmath.vector3()
-			local p2 = vmath.vector3()
-			p1.x = -self.velocity.y
-			p1.y = self.velocity.x
-			p2.x = self.velocity.y
-			p2.y = -self.velocity.x
-			-- scale offset vectors
-			local o1 = p1 * (math.random() / 15 + 0.15)
-			local o2 = p2 * (math.random() / 15 + 0.15)
-			local pos = go.get_position()
-			factory.create("#factory", pos + o1, nil, { velocity = self.velocity + o1 })
-			factory.create("#factory", pos + o2, nil, { velocity = self.velocity + o2 })
+		-- set self.terminated = true to prevent more than responses
+		if self.type == hash("treasure") then
+			treasure_explode(self)
+		elseif self.type == hash("small") then 
+			small_explode(self)
+		elseif self.type == hash("large") then 
+			large_explode(self)
+		elseif self.type == hash("asteroid") then 
+			asteroid_explode(self)
+		elseif self.type == hash("stony") then 
+			stony_impact(self)
 		end
-		--]]
+
+		-- termination processing
+		if self.terminated == true then
+			print "deleted"
+			go.delete()
+		end		
 	end
 end
+
