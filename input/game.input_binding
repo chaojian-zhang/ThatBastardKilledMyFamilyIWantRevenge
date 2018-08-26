@@ -46,6 +46,10 @@ key_trigger {
   input: KEY_3
   action: "key3"
 }
+key_trigger {
+  input: KEY_TILDE
+  action: "profiler_toggle"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_LEFT
   action: "click"

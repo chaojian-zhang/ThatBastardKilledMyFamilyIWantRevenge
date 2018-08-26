@@ -36,8 +36,6 @@ end
 local function animation_screen_out_finished(self, node)
 	-- Since we cannot delete ourselves in the gui_script, let's just disable ourself for now
 	msg.post(".", "disable") -- gui.delete_node() cannot remove self, go.delete() only works on game obejct script
-	-- Remove inputs from this gui component
-	msg.post(".", "release_input_focus")
 end
 
 --- Core Runtime Events
@@ -59,6 +57,9 @@ end
 function on_input(self, action_id, action)
 	local startButton = gui.get_node("start_button")
 	if action_id == hash("touch") or action_id == hash("click") and action.pressed and gui.pick_node(startButton, action.x, action.y) then
+		-- immediately remove inputs from this gui to avoid loading same levels multiple times
+		msg.post(".", "release_input_focus")
+		
 		-- ask GM to spawn level
 		msg.post(game_manager, "load_level", { level = 0 }) -- [6]
 

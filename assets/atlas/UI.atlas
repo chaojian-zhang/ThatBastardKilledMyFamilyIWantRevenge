@@ -1,0 +1,9 @@
+images {
+  image: "/assets/gui/ui_mobile_wheel.png"
+}
+images {
+  image: "/assets/gui/UI_mobile_button.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

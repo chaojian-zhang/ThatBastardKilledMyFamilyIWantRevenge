@@ -1,8 +1,9 @@
 -- Handles message; Communicates with GUI; Does level loading
 
 -- References
-go.property("game_gui", msg.url("/gui#game"))
-go.property("player_factory", msg.url("/player#factory"))
+go.property("game_gui", msg.url("/game_gui"))
+-- go.property("player_factory", msg.url("/player#factory"))
+go.property("player", msg.url("/player"))
 
 ---- Facilities
 local function load_level(self, level)
@@ -21,13 +22,14 @@ local function load_level(self, level)
 	self.current_screen = next_level
 
 	-- create and enable player 
-	self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
+	-- self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
 	msg.post(self.player, "start_level")
 
+	-- assign current_level
+	-- self.current_level = self.next_level
+
 	-- update gui
-	if level > 1 then
-		msg.post(self.game_gui, "enable")
-	end
+	msg.post(self.game_gui, "start_level", {level = level})
 end
 
 ---- Functions

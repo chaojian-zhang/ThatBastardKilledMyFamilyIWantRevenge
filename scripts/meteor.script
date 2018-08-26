@@ -108,14 +108,14 @@ function update(self, dt)
 	end
 	
 	if self.activated == false then
-		print "check activation"
+		-- temp: print "check activation"
 		-- check whether we are close enough to activate ourself
 		local player_pos = go.get_position("/player")
 		local my_pos = go.get_position()
 		local current_distance = vmath.length(my_pos - player_pos) 
 		-- If we are close enough, activate ourself
 		if current_distance < self.activation_range then
-			print "activated"
+			-- temp: print "activated"
 			self.activated = true
 		-- otherwise return
 		else
@@ -128,7 +128,7 @@ function update(self, dt)
 		return 
 	end
 
-	print "flying around"
+	-- temp: print "flying around"
 	
 	-- rotational animation
 	local r = go.get_rotation()
@@ -145,7 +145,7 @@ function update(self, dt)
 		-- go.delete()
 	-- end
 	if go.get_position().y < 0 then
-		print "terminated"
+		-- temp: print "terminated"
 		self.terminated = true
 		go.delete()
 	end
@@ -178,7 +178,7 @@ function on_message(self, message_id, message, sender)
 
 		-- termination processing
 		if self.terminated == true then
-			print "deleted"
+			-- temp: print "deleted"
 			go.delete()
 		end		
 	end

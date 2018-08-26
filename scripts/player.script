@@ -1,8 +1,9 @@
 -- Player Script, responsible for player inputs, damage calculation, player state management, and communication with gamemanager
 -- This script receives following messages:
 --	- start_level: used in starting a level, play start level animation
---	- fire: start firing
---	- cease_fire: stop firing
+--	- start_fire: start firing; From GUI
+--	- cease_fire: stop firing; From GUI
+--  - move: move player; From GUI; accepts message parameter dir, no need to be normalized (and don't do that because we will normalize it anyway)
 --	- update_weapon [weapon_url, weapon_damage, cool_down]: update weapon cool down
 
 go.property("game_manager", msg.url("#"))
@@ -40,7 +41,6 @@ end
 --- runtime events
 function init(self)
 	-- Let the script receive input from the player
-	msg.post(".", "acquire_input_focus")
 	msg.post(".", "disable")	-- default disable
 	
 	-- the current speed (and direction) of the space ship
@@ -49,6 +49,7 @@ function init(self)
 	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
 	self.started = false
 	self.weapon_cooldown = 0	-- Controls weapon cool down and also firing weapon sound gating
+	self.firing = false 		-- GUI signal, used to indicate whether player is pressing the firing button
 	
 	-- Animate the ship so it's swaying back and forth
 	go.set(".", "euler.z", -self.sway)
@@ -90,7 +91,9 @@ function on_input(self, action_id, action)
 		self.dir.x = 1
 	elseif action_id == hash("fire") and self.started == true then -- notice we are not checking action.pressed so it automatically handles continuous firing
 		attempt_fire(self)
-	elseif action_id == hash("touch") or action_id == hash("click") and self.started == true then
+	elseif action_id == hash("click") and self.started == true then
+		-- attempt_fire(self)
+	elseif action_id == hash("touch") and self.started == true and self.firing == true then
 		attempt_fire(self)
 	end
 
@@ -103,6 +106,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_level") then
+		msg.post(".", "acquire_input_focus")
 		self.started = true
 		-- enable self
 		msg.post(".", "enable")
@@ -110,5 +114,17 @@ function on_message(self, message_id, message, sender)
 		go.set_position(self.player_start_position)
 		-- play level entrance animation
 		go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, 150, go.EASING_OUTCUBIC, 1.25)
+	elseif message_id == hash("start_fire") then
+		self.firing = true
+	elseif message_id == hash("cease_fire") then
+		self.firing = false
+	elseif message_id == hash("move") then
+		self.dir = message.dir
+		
+		-- normalize
+		if vmath.length(self.dir) > 0 then
+			self.moving = true
+			self.dir = vmath.normalize(self.dir)
+		end
 	end
 end

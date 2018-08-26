@@ -6,7 +6,7 @@ main_collection = /levels/main.collectionc
 
 [input]
 game_binding = /input/game.input_bindingc
-use_accelerometer = 1
+use_accelerometer = 0
 
 [display]
 width = 720
