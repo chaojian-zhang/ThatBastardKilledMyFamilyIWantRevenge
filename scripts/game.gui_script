@@ -36,24 +36,35 @@ end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") then
-		-- get whether we clicked inside the button_node, otherwise just handle as if we clicked the wheel_node
-		if gui.pick_node(self.button_node, action.x, action.y) then
-			msg.post(player, "start_fire")
-		else
-			-- cease fire
-			msg.post(player, "cease_fire")
+		local one_point_start_fire = false 		-- Whether we have at least one touch point starting the fire
+		
+		-- For each touch point
+		for i, tpoint  in ipairs(action.touch) do
+			local pos = vmath.vector3(tpoint.x, tpoint.y, 0)
+			
+			-- get whether we clicked inside the button_node, otherwise just handle as if we clicked the wheel_node
+			if gui.pick_node(self.button_node, pos.x, pos.y) then
+				one_point_start_fire = true
+			else
+				-- determine movement input
+				-- calculate direction
+				local dir = gui.get_position(self.wheel_node)
+				dir.x = action.x - dir.x
+				dir.y = action.y - dir.y
+				-- get distance from the wheel
+				local reasonable_range = 300
+				local distance = vmath.length(dir);
+				if distance < reasonable_range then
+					msg.post(player, "move", {dir = dir})
+				end
+			end
 		end
 
-		-- determine movement input
-		-- calculate direction
-		local dir = gui.get_position(self.wheel_node)
-		dir.x = action.x - dir.x
-		dir.y = action.y - dir.y
-		-- get distance from the wheel
-		local reasonable_range = 300
-		local distance = vmath.length(dir);
-		if distance < reasonable_range then
-			msg.post(player, "move", {dir = dir})
+		-- start firing if we are on the fire button
+		if one_point_start_fire == true then
+			msg.post(player, "start_fire")
+		else
+			msg.post(player, "cease_fire")
 		end
 	elseif action_id == hash("profiler_toggle") and action.pressed then
 		msg.post("@system:", "toggle_profile")
