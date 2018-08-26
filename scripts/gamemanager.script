@@ -40,6 +40,7 @@ end
 ---- Core Events
 function init(self)
 	self.current_level = nil
+	self.loaded_levels = {}		-- To make sure we don't spawn each leve multiple times, which can happen on mobile
 end
 
 function final(self)
@@ -53,7 +54,8 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("load_level") then
+	if message_id == hash("load_level") and self.loaded_levels[message.level] == nil then
+		self.loaded_levels[message.level] = true
 		load_level(self, message.level)
 	end
 end

@@ -13,6 +13,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -32,6 +40,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
   }
   scale3 {
     x: 1.0
@@ -53,6 +69,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -72,6 +96,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
   }
   scale3 {
     x: 1.0
@@ -197,6 +229,34 @@ instances {
     x: -0.3
     y: 0.3
     z: 0.3
+  }
+}
+instances {
+  id: "meteor_large1"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
   }
 }
 scale_along_z: 0
@@ -476,6 +536,7 @@ embedded_instances {
   id: "meteors"
   children: "meteor_asteroid"
   children: "meteor_large"
+  children: "meteor_large1"
   children: "meteor_small"
   children: "meteor_stony"
   children: "meteor_treasure"

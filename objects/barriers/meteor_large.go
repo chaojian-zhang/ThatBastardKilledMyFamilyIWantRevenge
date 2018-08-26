@@ -26,8 +26,8 @@ embedded_components {
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"enemy\"\n"
-  "mask: \"player\"\n"
+  "group: \"decor\"\n"
+  "mask: \"player_weapon\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"
@@ -90,6 +90,24 @@ embedded_components {
   "looping: 0\n"
   "group: \"master\"\n"
   "gain: 0.6\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "small_factory"
+  type: "factory"
+  data: "prototype: \"/objects/barriers/meteor_small.go\"\n"
+  "load_dynamically: false\n"
   ""
   position {
     x: 0.0

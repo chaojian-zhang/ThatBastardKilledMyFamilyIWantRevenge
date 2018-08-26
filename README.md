@@ -33,6 +33,8 @@ This folder will be shared among programmers and artists. For efficient and conf
 4. Resolve all conflicts and make sure everything runs before you commit (otherwise use `git stash` to temporarily save unusable parts locally before committing changes)
 5. Notice current repository is around 2Mb, let's making it less than 40Mb for the final executable (excluding .git history)
 
+I will post weekly release updates on Github, along with a brief summary in our communication group.
+
 ## Cool Git Syntax to use with Defold
 
 --- Below are some cool Markdown syntaxes put here for reference purpose
@@ -65,6 +67,10 @@ This folder will be shared among programmers and artists. For efficient and conf
 9. Right click the root "Game Object" item in the *Outline* view again and select <kbd>Add Component File</kbd>, then select the script file "bonus_star.script". This script moves the bonus stars and make sure the player gets the right amount of points for catching them.
 10. Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
 11. Happy Defolding!
+
+# Logistics
+
+The game's full name is ***That Bastard Killed My Family I Want Revenge***, which will be too long for display and publishing, in which case we will use ***I, Revenge*** instead. Other recognizable names for this title are: *That Bastard*, and *My Family*
 
 # Attributes
 

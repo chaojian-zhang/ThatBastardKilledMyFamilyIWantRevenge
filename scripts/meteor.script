@@ -10,8 +10,11 @@ There are four types of meteors, each having different behavior and sound effect
 - hash(stony): Non-breakable, will not collide with player but will block weapon
 
 Game Object Components
+- The components will differ depending on which meteor game object this script is attached to, not all need to be present for all types of meteors
 - Meteors have an major_explode_sound, minor_explode_sound, shell_bullet_sound, treasure_sound components
-- Meteors should be placed in an "enemy" collision layer, with "player" collision layer as mask (for collision to respond properly)
+- Large meteors also have a small_factory for small meteors
+- Meteors don't collide with players (which are in "player" collision group), they just block player weapons (which are in "player_weapon" collision group)
+- Meteors should be placed in an "decor" collision group, with "player_weapon" collision layer as mask (for collision to respond properly)
 - Meteors might have an animation sprite component in the future for explosion effects (e.g. floating in the air and show cracks, at least for the hash(s)asteroid) type)
 
 This Game Object responds to such external messages (i.e. non-internal messages e.g. collision)
@@ -47,22 +50,20 @@ end
 
 local function large_explode(self)
 	-- play explode sound
-	msg.post("#minor_explode_sound", "play_sound")
+	msg.post("#minor_explode_sound", "play_sound") -- Use minor explor sound for large meteors; major explode sound is for asteroids
 	
 	-- split into two small meteors
-	local p1 = vmath.vector3()
-	local p2 = vmath.vector3()
-	p1.x = -self.velocity.y
-	p1.y = self.velocity.x
-	p2.x = self.velocity.y
-	p2.y = -self.velocity.x
-	-- scale offset vectors
-	local o1 = p1 * (math.random() / 15 + 0.15)
-	local o2 = p2 * (math.random() / 15 + 0.15)
-	local pos = go.get_position()
-	factory.create("#factory", pos + o1, nil, { velocity = self.velocity + o1 })
-	factory.create("#factory", pos + o2, nil, { velocity = self.velocity + o2 })
-	
+	local sapwn_count = math.random(1, 3)
+	for i = 1,sapwn_count,1 
+	do 
+		local p = vmath.vector3()
+		p.x = math.random(-1, 1) * self.velocity.y
+		p.y = math.random(-1, 1) * self.velocity.x
+		local offset = p * (math.random() / 15 + 0.15)
+		-- factory.create("#small_factory", pos + offset, nil, { velocity = self.velocity + offset })
+		factory.create("#small_factory", nil, nil, { velocity = self.velocity + offset})	-- Notice if we don't use nil for position we cannot just use go.get_position() as well because canvas is moving
+	end
+		
 	-- terminate self
 	self.terminated = true 
 end
@@ -72,7 +73,7 @@ local function asteroid_explode(self)
 	
 	if self.damage >= self.max_damage then
 		-- play explode sound
-		msg.post("#majorexplode_sound", "play_sound")
+		msg.post("#major_explode_sound", "play_sound")
 		
 		-- terminate self
 		self.terminated = true 
@@ -80,7 +81,7 @@ local function asteroid_explode(self)
 end
 
 local function stony_impact(self)
-	msg.post("shell_bullet_sound", "play_sound")
+	msg.post("#shell_bullet_sound", "play_sound")
 end
 
 -- core events
@@ -100,6 +101,9 @@ function init(self)
 	-- damage calculation
 	self.max_damage = 10
 	self.damage = 0
+
+	-- disable self
+	msg.post(".", "disable")
 end
 
 function update(self, dt)
@@ -108,15 +112,15 @@ function update(self, dt)
 	end
 	
 	if self.activated == false then
-		-- temp: print "check activation"
 		-- check whether we are close enough to activate ourself
-		local player_pos = go.get_position("/player")
-		local my_pos = go.get_position()
+		local player_pos = go.get_world_position("/player")		-- Notice we use world position for this purpose because canvas is moving
+		local my_pos = go.get_world_position()					-- Notice we use world position for this purpose because canvas is moving
 		local current_distance = vmath.length(my_pos - player_pos) 
 		-- If we are close enough, activate ourself
 		if current_distance < self.activation_range then
-			-- temp: print "activated"
 			self.activated = true
+			-- enable self
+			msg.post(".", "enable")
 		-- otherwise return
 		else
 			return
@@ -127,15 +131,13 @@ function update(self, dt)
 	if self.activated == false then 
 		return 
 	end
-
-	-- temp: print "flying around"
 	
 	-- rotational animation
 	local r = go.get_rotation()
 	r = vmath.slerp(dt, r, r * self.rot)
 	go.set_rotation(r)
 
-	-- floating animation
+	-- floating around animation
 	local p = go.get_position() + self.velocity * dt
 	go.set_position(p)
 
@@ -144,8 +146,7 @@ function update(self, dt)
 	-- if self.distance > self.max_distance then
 		-- go.delete()
 	-- end
-	if go.get_position().y < 0 then
-		-- temp: print "terminated"
+	if go.get_world_position().y < 0 then		-- Notice we use world position for this purpose
 		self.terminated = true
 		go.delete()
 	end
@@ -178,7 +179,6 @@ function on_message(self, message_id, message, sender)
 
 		-- termination processing
 		if self.terminated == true then
-			-- temp: print "deleted"
 			go.delete()
 		end		
 	end
