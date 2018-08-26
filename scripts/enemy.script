@@ -1,0 +1,77 @@
+--[[ 
+
+An attachable basic enemy script defining enemy aircraft behaviors. This is for defining "trivial" enemies that filling the space for fun.
+For most enemies, ideally they have more characters, in which case customized (and thus more efficient) scripts should be defined for them.
+
+Defines behaviors for:
+- Automatic activation
+- Automatic destroy
+- Movement
+- Shooting pattern
+- Collision and Scores
+
+Configurable Properties:
+- (Number) movement_speed
+- (Number) life
+- (Number) shooting_frequency
+- (Hash) shooting_pattern: aimed, straight (notice enemies cannot keep shooting otherwise there is no way to destroy them)
+- (Hash) flying_pattern: side_hover, approach_player (no matter the pattern they will move down the screen)
+
+Required Components: 
+- (Sprite) sprite
+- (Sound) fire_sound
+- (sound)(optional) ambient_sound (e.g. the noise the enemy makes when it shows up; We just need to play one instance of such sound for a fleet of similar enemies)
+- (Collision) collisionobject
+- (factory) weapon_factory
+
+--]]
+
+-- properties
+go.property("shoot_distance", 500)		-- how close we are to the player to start shooting
+go.property("shooting_frequency", 5)
+go.property("life", 1)
+go.property("player_reference", msg.url("/player"))
+
+-- core events
+function init(self)
+	-- initial parameters
+	self.counter = 1.0 / self.shooting_frequency
+	self.activation_distance = sys.get_config("display.height")		-- enemies always activated when on the screen edge, assuming screen longer than width
+
+	-- default disabled
+	self.activated = false
+	msg.post(".", "disable")
+end
+
+function update(self, dt)
+	-- count
+	self.counter = self.counter - dt
+	-- distance
+	if self.activated == false and (go.get_world_position().y  <= (self.activation_distance * 1.1)) then -- 1.2 as buffer area so we don't just pop up
+		self.activated = true
+		msg.post(".", "enable")
+	end
+
+	local distance = vmath.length(go.get_world_position() - go.get_world_position(self.player_reference))
+	if self.activated == true and self.counter <= 0 and distance <= self.shoot_distance then
+		-- fire away, fire at will
+		factory.create("#weapon_factory")
+		-- play firing sound
+		msg.post("#fire_sound", "play_sound")
+		-- reset counter
+		self.counter = 1 / self.shooting_frequency
+	end
+
+	if go.get_world_position().y < -100 then	-- -100 as buffer, better than 0 to avoid popout
+		go.delete()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") then
+		self.life = self.life - 1
+		if self.life <= 0 then
+			go.delete()
+		end
+	end
+end

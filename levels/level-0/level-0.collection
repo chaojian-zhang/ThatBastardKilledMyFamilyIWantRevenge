@@ -259,6 +259,26 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "helicopter"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 395.0
+    y: 2482.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "root"
@@ -513,6 +533,7 @@ embedded_instances {
 }
 embedded_instances {
   id: "enemies_layer"
+  children: "helicopter"
   children: "meteors"
   data: ""
   position {

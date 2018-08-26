@@ -1,21 +1,6 @@
 components {
-  id: "simple_bullet"
-  component: "/scripts/simple_bullet.script"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-components {
-  id: "pickup"
-  component: "/assets/particles/pickup.particlefx"
+  id: "enemy"
+  component: "/scripts/enemy.script"
   position {
     x: 0.0
     y: 0.0
@@ -29,6 +14,26 @@ components {
   }
 }
 embedded_components {
+  id: "sprite"
+  type: "sprite"
+  data: "tile_set: \"/assets/atlas/enemy_units.atlas\"\n"
+  "default_animation: \"helicopter\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ALPHA\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+}
+embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "collision_shape: \"\"\n"
@@ -36,15 +41,15 @@ embedded_components {
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"player_weapon\"\n"
-  "mask: \"enemy\"\n"
-  "mask: \"decor\"\n"
+  "group: \"enemy\"\n"
+  "mask: \"player\"\n"
+  "mask: \"player_weapon\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
-  "    shape_type: TYPE_BOX\n"
+  "    shape_type: TYPE_SPHERE\n"
   "    position {\n"
-  "      x: 0.0\n"
-  "      y: 0.0\n"
+  "      x: 8.0\n"
+  "      y: -7.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -54,11 +59,9 @@ embedded_components {
   "      w: 1.0\n"
   "    }\n"
   "    index: 0\n"
-  "    count: 3\n"
+  "    count: 1\n"
   "  }\n"
-  "  data: 3.214\n"
-  "  data: 5.3375\n"
-  "  data: 10.0\n"
+  "  data: 14.96\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
@@ -77,12 +80,30 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "sprite"
-  type: "sprite"
-  data: "tile_set: \"/assets/atlas/weapon_effects.atlas\"\n"
-  "default_animation: \"laser\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "blend_mode: BLEND_MODE_ALPHA\n"
+  id: "fire_sound"
+  type: "sound"
+  data: "sound: \"/assets/sounds/sfx_laser_zap.ogg\"\n"
+  "looping: 0\n"
+  "group: \"master\"\n"
+  "gain: 0.2\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "weapon_factory"
+  type: "factory"
+  data: "prototype: \"/objects/enemy_bullets/simple_enemy_bullet.go\"\n"
+  "load_dynamically: false\n"
   ""
   position {
     x: 0.0

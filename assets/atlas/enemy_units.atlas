@@ -1,0 +1,16 @@
+animations {
+  id: "helicopter"
+  images {
+    image: "/assets/units/helicopter/down/1.png"
+  }
+  images {
+    image: "/assets/units/helicopter/down/2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 40
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

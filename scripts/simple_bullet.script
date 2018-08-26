@@ -5,6 +5,10 @@
 -- - Spread/Single: 
 -- - Continuous/Slow: determined by firing frequency
 
+-- Requires
+-- - Collision
+-- - Particle
+
 go.property("speed", 800)
 go.property("life", 10)					-- For long-lasting weapons there is no termination life; Otherwise use 1 second
 go.property("frequency", 10)
@@ -51,7 +55,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("collision_response") then
 		-- explode(self)
 		-- msg.post(self.game_gui, "add_score", {amount = score})
-		particlefx.play("#pickup")
+		particlefx.play("#particle")
 		msg.post(message.other_id, "take_damage", {damage = self.damage}) -- go.delete(message.other_id)
 		-- msg.post("/gui#ui", "add_score", { score = 100 }) -- Post a message named "add_score" to the component "ui" in the game object named "gui" at the root of the main collection
 		go.delete()

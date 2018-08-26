@@ -28,7 +28,7 @@ Setup Requirements
 -- Game object properties
 go.property("type", hash("stony"))
 go.property("velocity", vmath.vector3())
-go.property("activation_range", 1600)			-- how close to player should this object beging moving
+go.property("activation_range", 1350)			-- how close to player should this object begin moving
 go.property("treasure_factory", msg.url("#factoryName"))
 
 -- local handler functions
@@ -146,7 +146,7 @@ function update(self, dt)
 	-- if self.distance > self.max_distance then
 		-- go.delete()
 	-- end
-	if go.get_world_position().y < 0 then		-- Notice we use world position for this purpose
+	if go.get_world_position().y < -100 then		-- Notice we use world position for this purpose
 		self.terminated = true
 		go.delete()
 	end
