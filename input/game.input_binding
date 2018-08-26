@@ -47,7 +47,7 @@ key_trigger {
   action: "key3"
 }
 key_trigger {
-  input: KEY_TILDE
+  input: KEY_BACKQUOTE
   action: "profiler_toggle"
 }
 mouse_trigger {
