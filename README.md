@@ -7,6 +7,7 @@ The game logic is extremely simple. The player controls an aircraft and is suppo
 This game contains no saving/loading mechanism and it is intended to be played like an arcade game.
 
 ## Level Loading
+
 A scaffold of folder structure and some initial loading and setup logic is templated but not yet filled in with details.
 
 Levels are dynamically loaded into main scene (main.collection) by gamemanager.script.
