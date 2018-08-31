@@ -6,7 +6,7 @@
 --  - move: move player; From GUI; accepts message parameter dir, no need to be normalized (and don't do that because we will normalize it anyway)
 --	- update_weapon [weapon_url, weapon_damage, cool_down]: update weapon cool down
 
-go.property("game_manager", msg.url("#"))
+go.property("game_manager", msg.url("/gamemanager"))
 -- go.property("player_start_position", vmath.vector3(360, 0, 0))
 go.property("max_movement_speed", 200)
 go.property("min_boundary_x", 10)	-- This should be related to display size
@@ -38,18 +38,24 @@ local function attempt_fire(self)
 	self.weapon_cooldown = self.current_weapon_cooldown
 end
 
---- runtime events
-function init(self)
-	-- Let the script receive input from the player
-	msg.post(".", "disable")	-- default disable
-	
+local function reinitialize(self)
 	-- the current speed (and direction) of the space ship
 	self.dir = vmath.vector3()
 	self.moving = false
-	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
-	self.started = false
+	self.started = false		-- whether level has started and whether we are allowed to act (e.g. in case of level animations and deaths we might not want player to move)
 	self.weapon_cooldown = 0	-- Controls weapon cool down and also firing weapon sound gating
 	self.firing = false 		-- GUI signal, used to indicate whether player is pressing the firing button
+end
+
+--- runtime events
+function init(self)
+	msg.post(".", "disable")	-- default disable
+	
+	-- fetch initial values
+	self.player_start_position = go.get_position() -- Just use whatever position inside the editor
+
+	-- initialize
+	reinitialize(self)
 	
 	-- Animate the ship so it's swaying back and forth
 	go.set(".", "euler.z", -self.sway)
@@ -57,6 +63,8 @@ function init(self)
 end
 
 function update(self, dt)
+	if self.started == false then return end
+	
 	if self.moving then
 		local pos = go.get_position()
 		pos = pos + self.dir * self.max_movement_speed * dt
@@ -81,6 +89,8 @@ function update(self, dt)
 end
 
 function on_input(self, action_id, action)
+	if self.started == false then return end
+	
 	if action_id == hash("up") then
 		self.dir.y = 1
 	elseif action_id == hash("down") then 
@@ -89,11 +99,11 @@ function on_input(self, action_id, action)
 		self.dir.x = -1
 	elseif action_id == hash("right") then
 		self.dir.x = 1
-	elseif action_id == hash("fire") and self.started == true then -- notice we are not checking action.pressed so it automatically handles continuous firing
+	elseif action_id == hash("fire") then -- notice we are not checking action.pressed so it automatically handles continuous firing
 		attempt_fire(self)
-	elseif action_id == hash("click") and self.started == true then
+	elseif action_id == hash("click") then
 		-- attempt_fire(self)
-	elseif action_id == hash("touch") and self.started == true and self.firing == true then
+	elseif action_id == hash("touch") and self.firing == true then
 		attempt_fire(self)
 	end
 
@@ -110,6 +120,8 @@ function on_message(self, message_id, message, sender)
 		self.started = true
 		-- enable self
 		msg.post(".", "enable")
+		-- select aircraft
+		msg.post("#sprite", "play_animation", { id = message.aircraft})
 		-- reset player location		
 		go.set_position(self.player_start_position)
 		-- play level entrance animation
@@ -126,5 +138,19 @@ function on_message(self, message_id, message, sender)
 			self.moving = true
 			self.dir = vmath.normalize(self.dir)
 		end
+	elseif message_id == hash("collision_response") then
+		if self.started == true then 
+			-- temporarily disable self for future hit
+			self.started = false
+			-- play explosion animation
+			msg.post("#sprite", "play_animation", { id = hash("aircraft_explosion")})
+			-- play explosion sound
+			msg.post("#extinguish_sound", "play_sound")
+		end
+	elseif message_id == hash("animation_done") then -- handles finishing playing explosion animation
+		-- hit response: notify GM of hit after we have finished animation
+		msg.post(self.game_manager, "player_got_hit")
+		-- hide self's components
+		msg.post(".", "disable")
 	end
 end

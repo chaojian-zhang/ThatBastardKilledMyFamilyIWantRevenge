@@ -2,8 +2,13 @@
 
 -- References
 go.property("game_gui", msg.url("/game_gui"))
+go.property("end_gui", msg.url("/end_gui"))
+go.property("start_gui", msg.url("/start_gui"))
 -- go.property("player_factory", msg.url("/player#factory"))
 go.property("player", msg.url("/player"))
+
+-- local variables
+local player_remaining_lives = 0	-- default 3 lives, i.e. "2" lives remaining
 
 ---- Facilities
 local function load_level(self, level)
@@ -16,14 +21,14 @@ local function load_level(self, level)
 
 	-- unload: level transition effect can go here...
 	if self.current_level then
-		go.delete(self.current_screen)
+		go.delete(self.current_level)
 	end
 	-- the spawed next level is set as new current level
-	self.current_screen = next_level
+	self.current_level = next_level
 
 	-- create and enable player 
 	-- self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
-	msg.post(self.player, "start_level")
+	msg.post(self.player, "start_level", { aircraft = hash("space_shuttle_idle")})
 
 	-- assign current_level
 	-- self.current_level = self.next_level
@@ -33,14 +38,18 @@ local function load_level(self, level)
 end
 
 ---- Functions
+local function reinitialize(self)
+	self.current_level = nil
+	self.loaded_levels = {}		-- To make sure we don't spawn each leve multiple times, which can happen on mobile
+end
+
 local function start_game(self)
 
 end
 
 ---- Core Events
 function init(self)
-	self.current_level = nil
-	self.loaded_levels = {}		-- To make sure we don't spawn each leve multiple times, which can happen on mobile
+	reinitialize(self)
 end
 
 function final(self)
@@ -57,6 +66,31 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("load_level") and self.loaded_levels[message.level] == nil then
 		self.loaded_levels[message.level] = true
 		load_level(self, message.level)
+	elseif message_id == hash("player_got_hit") then -- handle player took damage
+		-- respawn and continue play
+		if player_remaining_lives > 0 then
+			-- notify GUI
+			-- 
+		else
+			-- delete level
+			go.delete(self.current_level)
+			-- hide game screen
+			msg.post(self.game_gui, "disable")
+			-- show game over screen
+			msg.post(self.end_gui, "show_up", { whether_completed_all_levels = false})
+		end
+
+		-- reset level switches
+		reinitialize(self)
+	elseif message_id == hash("restart_game") then 
+		-- sent by end-game screen when player wishes to start over
+		
+		-- reset player
+		-- ...
+		-- reinitialize start_gui
+		msg.post(self.start_gui, "reinitialize")
+		-- reinitialize game_gui
+		msg.post(self.game_gui, "reinitialize")
 	end
 end
 

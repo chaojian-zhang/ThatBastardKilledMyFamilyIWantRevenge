@@ -3,13 +3,7 @@ local game_manager = "/gamemanager"
 local player = "/player"
 
 --- local  functions
-local function scale_down(self, node)
-	local s = 1.0
-	gui.animate(node, gui.PROP_SCALE, vmath.vector4(s, s, s, 0), gui.EASING_OUT, 0.05)
-end 
-
---- event API
-function init(self)
+local function reinitialize(self)
 	-- Define GUI variables
 	self.level = 0
 	self.score = 0
@@ -18,20 +12,34 @@ function init(self)
 	self.screen_node = gui.get_node("black_screen")
 	self.wheel_node = gui.get_node("mobile_wheel")
 	self.button_node = gui.get_node("mobile_button")
-	
-	-- delete mobile controls for PC
-	local sysinfo = sys.get_sys_info()
-	if sysinfo.system_name ~= "Android" and sysinfo.system_name ~= "iPhone OS" then
-		gui.delete_node(self.wheel_node)
-		gui.delete_node(self.button_node)
-	end
 
 	-- set scene blue background
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.094, 0.113, 0.227, 0) } )
-	msg.post(".", "acquire_input_focus")
+	msg.post(".", "acquire_input_focus")		-- our input will be obsecured when start_gui is present because it returns true in its input() event
+
+	-- show or hide mobile controls
+	local sysinfo = sys.get_sys_info()
+	if sysinfo.system_name ~= "Android" and sysinfo.system_name ~= "iPhone OS" then
+		gui.set_enabled(self.wheel_node, false)
+		gui.set_enabled(self.button_node, false)
+	else
+		gui.set_enabled(self.wheel_node, true)
+		gui.set_enabled(self.button_node, true)
+	end
 
 	-- hide self
 	msg.post(".", "disable")
+end
+
+local function scale_down(self, node)
+	local s = 1.0
+	gui.animate(node, gui.PROP_SCALE, vmath.vector4(s, s, s, 0), gui.EASING_OUT, 0.05)
+end 
+
+--- event API
+function init(self)	
+	-- initialize
+	reinitialize(self)
 end
 
 function on_input(self, action_id, action)
@@ -77,12 +85,15 @@ end
 - add_level
 --]]
 function on_message(self, message_id, message, sender)
-	if message_id == hash("start_level") then
+	if message_id == hash("start_level") then		-- when user starts level
 		msg.post(".", "enable")
 		if message.level == 0 then
 			gui.set_enabled(self.screen_node, false)
 			gui.set_enabled(self.level_node, false)
 		end
+	elseif message_id == hash("reinitialize") then	
+		-- when user restarts the whole game from end_gui after death (notice the actual gameplay hasn't started yet, this is like init())
+		reinitialize(self)
 	elseif message_id == hash("add_score") then
 		self.score = self.score + message.amount
 		gui.set_text(self.score_node, "Score: "..tostring(self.score))
