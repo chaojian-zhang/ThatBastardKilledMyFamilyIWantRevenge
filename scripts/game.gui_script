@@ -118,9 +118,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("start_level") then		-- when user starts level
 		msg.post(".", "enable")
 		if message.level == 0 then
-			-- show corresponding remaining lives
-			set_lives(self, 3)
-			
 			-- hide temporary screens
 			gui.set_enabled(self.screen_node, false)
 			gui.set_enabled(self.level_node, false)
@@ -128,6 +125,8 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("reinitialize") then	
 		-- when user restarts the whole game from end_gui after death (notice the actual gameplay hasn't started yet, this is like init())
 		reinitialize(self)
+	elseif message_id == hash("set_lives") then
+		set_lives(self, message.lives)
 	elseif message_id == hash("add_score") then
 		self.score = self.score + message.amount
 		gui.set_text(self.score_node, "Score: "..tostring(self.score))

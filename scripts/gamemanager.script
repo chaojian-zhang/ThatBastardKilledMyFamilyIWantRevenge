@@ -8,7 +8,7 @@ go.property("start_gui", msg.url("/start_gui"))
 go.property("player", msg.url("/player"))
 
 -- local variables
-local player_remaining_lives = 0	-- default 3 lives, i.e. "2" lives remaining
+local player_remaining_lives = 1	-- default 3 lives
 
 ---- Facilities
 local function preload_level(self, level, should_start)
@@ -43,11 +43,9 @@ local function load_level(self, level)
 	-- self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
 	msg.post(self.player, "start_level", { aircraft = hash("space_shuttle_idle")})
 
-	-- assign current_level
-	-- self.current_level = self.next_level
-
 	-- update gui
 	msg.post(self.game_gui, "start_level", {level = level})
+	msg.post(self.game_gui, "set_lives", {lives = player_remaining_lives})
 end
 
 ---- Functions
@@ -87,9 +85,12 @@ function on_message(self, message_id, message, sender)
 		load_level(self, message.level)
 	elseif message_id == hash("player_got_hit") then -- handle player took damage
 		-- respawn and continue play
-		if player_remaining_lives > 0 then
+		if player_remaining_lives > 1 then
+			player_remaining_lives = player_remaining_lives - 1
 			-- notify GUI
-			-- 
+			msg.post(self.game_gui, "set_lives", { lives = player_remaining_lives} )
+			-- respawn player
+			msg.post(self.player, "start_level", { aircraft = hash("space_shuttle_idle")})
 		else
 			-- delete level
 			go.delete_all(self.current_level)  -- go.delete(self.current_level)
@@ -97,10 +98,10 @@ function on_message(self, message_id, message, sender)
 			msg.post(self.game_gui, "disable")
 			-- show game over screen
 			msg.post(self.end_gui, "show_up", { whether_completed_all_levels = false})
-		end
 
-		-- reset level switches
-		reinitialize(self)
+			-- reset level switches
+			reinitialize(self)
+		end
 	elseif message_id == hash("restart_game") then 
 		-- sent by end-game screen when player wishes to start over
 		
