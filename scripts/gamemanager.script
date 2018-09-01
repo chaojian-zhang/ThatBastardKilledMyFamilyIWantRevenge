@@ -11,6 +11,19 @@ go.property("player", msg.url("/player"))
 local player_remaining_lives = 0	-- default 3 lives, i.e. "2" lives remaining
 
 ---- Facilities
+local function preload_level(self, level, should_start)
+	-- which level to load
+	local f = "/levels#factory-" .. level
+	-- where should the level be spawned?
+	local p = vmath.vector3()
+	-- spawn the level
+	collectionfactory.load(f, function(self, url, result) end)
+
+	if should_start == true then
+		load_level(self, level)
+	end
+end
+
 local function load_level(self, level)
 	-- which level to load
 	local f = "/levels#factory-" .. level
@@ -63,8 +76,14 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("load_level") and self.loaded_levels[message.level] == nil then
-		self.loaded_levels[message.level] = true
+	if message_id == hash("preload_level") then
+		if self.loaded_levels[message.level] == nil then
+			self.loaded_levels[message.level] = true
+			preload_level(self, message.level, message.should_start)
+		elseif message.should_start then
+			load_level(self, message.level)			
+		end
+	elseif message_id == hash("load_level") and self.loaded_levels[message.level] ~= nil then
 		load_level(self, message.level)
 	elseif message_id == hash("player_got_hit") then -- handle player took damage
 		-- respawn and continue play
@@ -73,7 +92,7 @@ function on_message(self, message_id, message, sender)
 			-- 
 		else
 			-- delete level
-			go.delete(self.current_level)
+			go.delete_all(self.current_level)  -- go.delete(self.current_level)
 			-- hide game screen
 			msg.post(self.game_gui, "disable")
 			-- show game over screen

@@ -5,6 +5,7 @@ local player = "/player"
 --- local  functions
 local function reinitialize(self)
 	-- Define GUI variables
+	self.lives = 0
 	self.level = 0
 	self.score = 0
 	self.score_node = gui.get_node("score")
@@ -34,7 +35,36 @@ end
 local function scale_down(self, node)
 	local s = 1.0
 	gui.animate(node, gui.PROP_SCALE, vmath.vector4(s, s, s, 0), gui.EASING_OUT, 0.05)
-end 
+end
+
+local function clear_lives(self)
+	-- delete all cloned nodes
+	for i=1,self.lives do
+		local n = gui.get_node("life_" .. i)
+		gui.delete_node(n)
+	end
+end
+
+local function set_lives(self, lives)
+	if self.lives > 0 then
+		clear_lives(self)
+	end
+
+	self.lives = lives
+	-- we use an off screen node as template by cloning it
+	local template = gui.get_node("life")
+
+	for i=1,self.lives do
+		-- one clone for each life
+		local new = gui.clone(template)
+		-- set the node id so we can find and delete them later
+		gui.set_id(new, "life_" .. i)
+		-- line them up
+		local pos = gui.get_position(new)
+		pos.x = 660 - i * 60
+		gui.set_position(new, pos)
+	end
+end
 
 --- event API
 function init(self)	
@@ -88,6 +118,10 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("start_level") then		-- when user starts level
 		msg.post(".", "enable")
 		if message.level == 0 then
+			-- show corresponding remaining lives
+			set_lives(self, 3)
+			
+			-- hide temporary screens
 			gui.set_enabled(self.screen_node, false)
 			gui.set_enabled(self.level_node, false)
 		end

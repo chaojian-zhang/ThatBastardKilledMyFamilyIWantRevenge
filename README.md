@@ -79,4 +79,6 @@ This game is powered by Defold game engine. Some assets are taken from tutorial 
 
 Gratitudes to those individuals without whom this work will never be completed.
 - Kenney Vleugels (www.kenney.nl) License (CC0): Space Shooter (Redux, plus fonts and sounds)
-- 
+
+And those platforms:
+- https://www.vecteezy.com Airplanes Silhouettes

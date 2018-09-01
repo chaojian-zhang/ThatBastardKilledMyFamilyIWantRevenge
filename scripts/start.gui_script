@@ -22,6 +22,9 @@ local function animation_stage_2_finished(self, node)
 	-- gui.animate(start_text, "color.w", 0, gui.EASING_INBACK, 4.0, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
 	gui.animate(start_text, "color.w", 0, vec, 4.0, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
 
+	-- ask GM to preload level
+	msg.post(game_manager, "preload_level", { level = 0, should_start = false}) -- [6]
+
 	-- Now, acquire input. Due to timing, we're gonna be on top of the input stack.
 	msg.post(".", "acquire_input_focus")
 end
@@ -40,6 +43,8 @@ local function animation_screen_out_finished(self, leftscreen_node)
 end
 
 local function reinitialize(self)
+	self.loadlevel_requested = false
+	
 	-- fetch all UI elements and set initial display states
 	local start_button = gui.get_node("start_button")
 	local logo_image = gui.get_node("logo_image")
@@ -70,6 +75,8 @@ local function reinitialize(self)
 	gui.set_enabled(start_button, false)
 	-- enable gametitle_image
 	gui.set_enabled(gametitle_image, true)
+	-- set text
+	gui.set_text(start_text, "Start")
 
 	-- Stage 1 Animation: Pop-in Logo Image
 	gui.animate(logo_image, "color.w", 1, gui.EASING_INEXPO, 1, 0, animation_stage_1_finished, gui.PLAYBACK_ONCE_FORWARD)
@@ -94,12 +101,19 @@ function on_input(self, action_id, action)
 	if action_id == hash("touch") or action_id == hash("click") and action.pressed and gui.pick_node(start_button, action.x, action.y) then
 		-- immediately remove inputs from this gui to avoid loading same levels multiple times
 		msg.post(".", "release_input_focus")
-		
-		-- ask GM to spawn level
-		msg.post(game_manager, "load_level", { level = 0 }) -- [6]
+
+		-- displaying "loading..." text
+		local start_text = gui.get_node("start_text")
+		gui.cancel_animation(start_text, "color.w")
+		gui.set_text(start_text, "Loading...")
+		local color = gui.get_color(start_text)
+		color.w = 1
+		gui.set_color(start_text, color)
+		-- ask GM to preload level
+		msg.post(game_manager, "preload_level", { level = 0, should_start = true}) -- [6]
 
 		-- hide nodes
-		gui.set_enabled(start_button, false) -- msg.post(startButton, "disable")
+		-- gui.set_enabled(start_button, false) -- msg.post(startButton, "disable")
 		gui.set_enabled(gui.get_node("gametitle_image"), false)
 
 		-- play screen out animation

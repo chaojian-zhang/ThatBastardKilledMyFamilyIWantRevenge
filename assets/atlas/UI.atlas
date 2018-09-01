@@ -4,6 +4,9 @@ images {
 images {
   image: "/assets/gui/UI_mobile_button.png"
 }
+images {
+  image: "/assets/pictures/Aircraft.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
