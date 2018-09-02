@@ -8,7 +8,7 @@
 
 go.property("game_manager", msg.url("/gamemanager"))
 -- go.property("player_start_position", vmath.vector3(360, 0, 0))
-go.property("max_movement_speed", 200)
+go.property("max_movement_speed", 200)	-- 500 is good, very easy to die, very smooth navigation
 go.property("min_boundary_x", 10)	-- This should be related to display size
 go.property("max_boundary_x", 710)	-- This should be related to display size
 go.property("min_boundary_y", 10)	-- This should be related to display size

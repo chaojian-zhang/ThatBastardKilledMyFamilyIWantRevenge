@@ -6,56 +6,79 @@ go.property("end_gui", msg.url("/end_gui"))
 go.property("start_gui", msg.url("/start_gui"))
 -- go.property("player_factory", msg.url("/player#factory"))
 go.property("player", msg.url("/player"))
+go.property("player_default_lives", 3)
 
 -- local variables
-local player_remaining_lives = 1	-- default 3 lives
+local player_remaining_lives = 3	-- default 3 lives
 
 ---- Facilities
-local function preload_level(self, level, should_start)
-	-- which level to load
-	local f = "/levels#factory-" .. level
-	-- where should the level be spawned?
-	local p = vmath.vector3()
-	-- spawn the level
-	collectionfactory.load(f, function(self, url, result) end)
+local param_last_loading_level = 0
+local param_should_start = false
+local param_notifier = nil
 
-	if should_start == true then
-		load_level(self, level)
+local function preload_level_finished(self, url, result)
+	self.loaded_levels[param_last_loading_level] = true
+	
+	-- currently this is blocking, we might need to get notified in stead from collectionfactory.load())
+	if param_should_start == true then
+		-- which level to load
+		local f = "/levels#factory-" .. param_last_loading_level
+		-- where should the level be spawned?
+		local p = vmath.vector3()
+		
+		-- spawn the level
+		local next_level = collectionfactory.create(f, p)
+
+		-- unload: level transition effect can go here...
+		if self.current_level then
+			go.delete(self.current_level)
+		end
+		-- the spawed next level is set as new current level
+		self.current_level = next_level
+
+		-- create and enable player 
+		-- self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
+		msg.post(self.player, "start_level", { aircraft = hash("space_shuttle_idle")})
+
+		-- update gui
+		msg.post(self.game_gui, "start_level", {level = param_last_loading_level})
+		msg.post(self.game_gui, "set_lives", {lives = player_remaining_lives})
+	end
+
+	if param_notifier ~= nil then
+		msg.post(param_notifier, "level_loaded")
 	end
 end
 
-local function load_level(self, level)
-	-- which level to load
-	local f = "/levels#factory-" .. level
-	-- where should the level be spawned?
-	local p = vmath.vector3()
-	-- spawn the level
-	local next_level = collectionfactory.create(f, p)
+local function preload_level(self, level, should_start, notifier)
+	-- record parameters for further processing
+	param_last_loading_levle = level
+	param_should_start = should_start
+	param_notifier = notifier
+	
+	if self.loaded_levels[level] == nil then
+		if self.loading_levels[level] == nil then
+			self.loading_levels[level] = true
+			-- which level to load
+			local f = "/levels#factory-" .. level
+			-- where should the level be spawned?
+			local p = vmath.vector3()
 
-	-- unload: level transition effect can go here...
-	if self.current_level then
-		go.delete(self.current_level)
+			-- load the level
+			collectionfactory.load(f, preload_level_finished)
+		end
+	else
+		preload_level_finished(self, nil, nil)
 	end
-	-- the spawed next level is set as new current level
-	self.current_level = next_level
-
-	-- create and enable player 
-	-- self.player = factory.create(self.player_factory, go.get_position(self.player_factory))
-	msg.post(self.player, "start_level", { aircraft = hash("space_shuttle_idle")})
-
-	-- update gui
-	msg.post(self.game_gui, "start_level", {level = level})
-	msg.post(self.game_gui, "set_lives", {lives = player_remaining_lives})
 end
 
 ---- Functions
 local function reinitialize(self)
 	self.current_level = nil
 	self.loaded_levels = {}		-- To make sure we don't spawn each leve multiple times, which can happen on mobile
-end
+	self.loading_levels = {}
 
-local function start_game(self)
-
+	player_remaining_lives = self.player_default_lives
 end
 
 ---- Core Events
@@ -74,15 +97,8 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("preload_level") then
-		if self.loaded_levels[message.level] == nil then
-			self.loaded_levels[message.level] = true
-			preload_level(self, message.level, message.should_start)
-		elseif message.should_start then
-			load_level(self, message.level)			
-		end
-	elseif message_id == hash("load_level") and self.loaded_levels[message.level] ~= nil then
-		load_level(self, message.level)
+	if message_id == hash("preload_level") or message_id == hash("load_level") then
+		preload_level(self, message.level, message.should_start and message.should_start or false, message.notifier)
 	elseif message_id == hash("player_got_hit") then -- handle player took damage
 		-- respawn and continue play
 		if player_remaining_lives > 1 then
@@ -112,14 +128,4 @@ function on_message(self, message_id, message, sender)
 		-- reinitialize game_gui
 		msg.post(self.game_gui, "reinitialize")
 	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Remove this function if not needed
 end

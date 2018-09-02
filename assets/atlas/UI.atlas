@@ -2,10 +2,16 @@ images {
   image: "/assets/gui/ui_mobile_wheel.png"
 }
 images {
-  image: "/assets/gui/UI_mobile_button.png"
+  image: "/assets/pictures/Aircraft.png"
 }
 images {
-  image: "/assets/pictures/Aircraft.png"
+  image: "/assets/gui/ui_mobile_wheel_highlight.png"
+}
+images {
+  image: "/assets/gui/ui_mobile_button_highlight.png"
+}
+images {
+  image: "/assets/gui/ui_mobile_button.png"
 }
 margin: 0
 extrude_borders: 0

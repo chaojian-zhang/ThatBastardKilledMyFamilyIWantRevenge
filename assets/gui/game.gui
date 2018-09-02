@@ -278,7 +278,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "UI/UI_mobile_button"
+  texture: "UI/ui_mobile_button"
   id: "mobile_button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
