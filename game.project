@@ -23,3 +23,6 @@ shared_state = 1
 immersive_mode = 1
 package = com.totalimagine.game
 
+[sprite]
+max_count = 1024
+

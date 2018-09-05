@@ -13,6 +13,157 @@ images {
 images {
   image: "/assets/pictures/ring_planet.png"
 }
+animations {
+  id: "barracks"
+  images {
+    image: "/assets/buildings/barracks/1.png"
+  }
+  images {
+    image: "/assets/buildings/barracks/2.png"
+  }
+  images {
+    image: "/assets/buildings/barracks/3.png"
+  }
+  images {
+    image: "/assets/buildings/barracks/4.png"
+  }
+  images {
+    image: "/assets/buildings/barracks/5.png"
+  }
+  images {
+    image: "/assets/buildings/barracks/6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "command_center"
+  images {
+    image: "/assets/buildings/command-center/1.png"
+  }
+  images {
+    image: "/assets/buildings/command-center/2.png"
+  }
+  images {
+    image: "/assets/buildings/command-center/3.png"
+  }
+  images {
+    image: "/assets/buildings/command-center/4.png"
+  }
+  images {
+    image: "/assets/buildings/command-center/5.png"
+  }
+  images {
+    image: "/assets/buildings/command-center/6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "factory"
+  images {
+    image: "/assets/buildings/factory/1.png"
+  }
+  images {
+    image: "/assets/buildings/factory/2.png"
+  }
+  images {
+    image: "/assets/buildings/factory/3.png"
+  }
+  images {
+    image: "/assets/buildings/factory/4.png"
+  }
+  images {
+    image: "/assets/buildings/factory/5.png"
+  }
+  images {
+    image: "/assets/buildings/factory/6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "heliport"
+  images {
+    image: "/assets/buildings/heliport/1.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/2.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/3.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/4.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/5.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/6.png"
+  }
+  images {
+    image: "/assets/buildings/heliport/7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "medic_bay"
+  images {
+    image: "/assets/buildings/medic-bay/1.png"
+  }
+  images {
+    image: "/assets/buildings/medic-bay/2.png"
+  }
+  images {
+    image: "/assets/buildings/medic-bay/3.png"
+  }
+  images {
+    image: "/assets/buildings/medic-bay/4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "refinery"
+  images {
+    image: "/assets/buildings/refinery/1.png"
+  }
+  images {
+    image: "/assets/buildings/refinery/2.png"
+  }
+  images {
+    image: "/assets/buildings/refinery/3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "supply_depot"
+  images {
+    image: "/assets/buildings/supply-depot/1.png"
+  }
+  images {
+    image: "/assets/buildings/supply-depot/2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
 margin: 0
 extrude_borders: 1
 inner_padding: 0

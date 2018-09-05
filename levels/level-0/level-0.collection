@@ -279,6 +279,1326 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "flying_small_planets1"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 3911.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 501.0
+    y: 4837.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_1"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 433.0
+    y: 5951.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: -0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_large_planets"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: 0.0
+    y: 4428.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_large_planets3"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: -331.0
+    y: 6557.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_small_planets2"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 5171.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_large_planets4"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: 0.0
+    y: 4428.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_large_planets5"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: 0.0
+    y: -26.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_large_planets6"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: -331.0
+    y: 2103.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_large_planets7"
+  prototype: "/levels/level-0/flying_large_planets.go"
+  position {
+    x: -331.0
+    y: 6557.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "flying_small_planets3"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 717.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets4"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 3911.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets5"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 179.0
+    y: 5171.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_4"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 501.0
+    y: 4837.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_5"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 433.0
+    y: 5951.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: -0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_6"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 501.0
+    y: 1643.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "flying_small_planets_7"
+  prototype: "/levels/level-0/flying_small_planets.go"
+  position {
+    x: 433.0
+    y: 2757.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: -0.3
+    y: 0.3
+    z: 0.3
+  }
+}
+instances {
+  id: "meteor_asteroid1"
+  prototype: "/objects/barriers/meteor_asteroid.go"
+  position {
+    x: 130.0
+    y: 1684.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large2"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 520.0
+    y: 2130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large3"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_small1"
+  prototype: "/objects/barriers/meteor_small.go"
+  position {
+    x: 190.0
+    y: 2697.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_stony1"
+  prototype: "/objects/barriers/meteor_stony.go"
+  position {
+    x: 91.0
+    y: 2243.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_treasure1"
+  prototype: "/objects/barriers/meteor_treasure.go"
+  position {
+    x: 37.0
+    y: 1035.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_asteroid2"
+  prototype: "/objects/barriers/meteor_asteroid.go"
+  position {
+    x: 130.0
+    y: 1684.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large4"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 520.0
+    y: 2130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large5"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_small2"
+  prototype: "/objects/barriers/meteor_small.go"
+  position {
+    x: 190.0
+    y: 2697.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_stony2"
+  prototype: "/objects/barriers/meteor_stony.go"
+  position {
+    x: 91.0
+    y: 2243.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_treasure2"
+  prototype: "/objects/barriers/meteor_treasure.go"
+  position {
+    x: 37.0
+    y: 1035.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter1"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: -137.0
+    y: 2183.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter2"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 417.0
+    y: 3215.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter3"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: -338.0
+    y: 3944.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter4"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 417.0
+    y: 5429.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter5"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 417.0
+    y: 1227.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter6"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: -137.0
+    y: 2183.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter7"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 417.0
+    y: 3215.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter8"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: -338.0
+    y: 3944.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "helicopter9"
+  prototype: "/objects/enemies/helicopter.go"
+  position {
+    x: 417.0
+    y: 5429.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_asteroid3"
+  prototype: "/objects/barriers/meteor_asteroid.go"
+  position {
+    x: 130.0
+    y: 1684.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large6"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 520.0
+    y: 2130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large7"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_small3"
+  prototype: "/objects/barriers/meteor_small.go"
+  position {
+    x: 190.0
+    y: 2697.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_stony3"
+  prototype: "/objects/barriers/meteor_stony.go"
+  position {
+    x: 91.0
+    y: 2243.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_treasure3"
+  prototype: "/objects/barriers/meteor_treasure.go"
+  position {
+    x: 37.0
+    y: 1035.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_asteroid4"
+  prototype: "/objects/barriers/meteor_asteroid.go"
+  position {
+    x: 130.0
+    y: 1684.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large8"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 520.0
+    y: 2130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large9"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_small4"
+  prototype: "/objects/barriers/meteor_small.go"
+  position {
+    x: 190.0
+    y: 2697.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_stony4"
+  prototype: "/objects/barriers/meteor_stony.go"
+  position {
+    x: 91.0
+    y: 2243.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_treasure4"
+  prototype: "/objects/barriers/meteor_treasure.go"
+  position {
+    x: 37.0
+    y: 1035.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_asteroid5"
+  prototype: "/objects/barriers/meteor_asteroid.go"
+  position {
+    x: 130.0
+    y: 1684.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -15.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large10"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 520.0
+    y: 2130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_large11"
+  prototype: "/objects/barriers/meteor_large.go"
+  position {
+    x: 581.0
+    y: 975.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "0.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_small5"
+  prototype: "/objects/barriers/meteor_small.go"
+  position {
+    x: 190.0
+    y: 2697.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_stony5"
+  prototype: "/objects/barriers/meteor_stony.go"
+  position {
+    x: 91.0
+    y: 2243.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "meteor"
+    properties {
+      id: "velocity"
+      value: "15.0, -20.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "meteor_treasure5"
+  prototype: "/objects/barriers/meteor_treasure.go"
+  position {
+    x: 37.0
+    y: 1035.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "root"
@@ -390,7 +1710,9 @@ embedded_instances {
   children: "background_animations_layer"
   children: "background_tiles_layers"
   children: "enemies_layer"
+  children: "enemies_layer1"
   children: "flying_background_elements"
+  children: "flying_background_elements1"
   data: "components {\n"
   "  id: \"level_animator\"\n"
   "  component: \"/scripts/level_animator.script\"\n"
@@ -534,7 +1856,13 @@ embedded_instances {
 embedded_instances {
   id: "enemies_layer"
   children: "helicopter"
+  children: "helicopter1"
+  children: "helicopter2"
+  children: "helicopter3"
+  children: "helicopter4"
   children: "meteors"
+  children: "meteors1"
+  children: "meteors2"
   data: ""
   position {
     x: 0.0
@@ -621,9 +1949,15 @@ embedded_instances {
 }
 embedded_instances {
   id: "flying_background_elements"
+  children: "flying_large_planets"
   children: "flying_large_planets1"
   children: "flying_large_planets2"
+  children: "flying_large_planets3"
   children: "flying_small_planets"
+  children: "flying_small_planets1"
+  children: "flying_small_planets2"
+  children: "flying_small_planets_"
+  children: "flying_small_planets_1"
   children: "flying_small_planets_2"
   children: "flying_small_planets_3"
   data: ""
@@ -631,6 +1965,195 @@ embedded_instances {
     x: 0.0
     y: 0.0
     z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "flying_background_elements1"
+  children: "flying_large_planets4"
+  children: "flying_large_planets5"
+  children: "flying_large_planets6"
+  children: "flying_large_planets7"
+  children: "flying_small_planets3"
+  children: "flying_small_planets4"
+  children: "flying_small_planets5"
+  children: "flying_small_planets_4"
+  children: "flying_small_planets_5"
+  children: "flying_small_planets_6"
+  children: "flying_small_planets_7"
+  data: ""
+  position {
+    x: 0.0
+    y: 8267.0
+    z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors1"
+  children: "meteor_asteroid1"
+  children: "meteor_large2"
+  children: "meteor_large3"
+  children: "meteor_small1"
+  children: "meteor_stony1"
+  children: "meteor_treasure1"
+  data: ""
+  position {
+    x: 0.0
+    y: 2584.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors2"
+  children: "meteor_asteroid2"
+  children: "meteor_large4"
+  children: "meteor_large5"
+  children: "meteor_small2"
+  children: "meteor_stony2"
+  children: "meteor_treasure2"
+  data: ""
+  position {
+    x: 0.0
+    y: 5227.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "enemies_layer1"
+  children: "helicopter5"
+  children: "helicopter6"
+  children: "helicopter7"
+  children: "helicopter8"
+  children: "helicopter9"
+  children: "meteors3"
+  children: "meteors4"
+  children: "meteors5"
+  data: ""
+  position {
+    x: 0.0
+    y: 8383.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors3"
+  children: "meteor_asteroid3"
+  children: "meteor_large6"
+  children: "meteor_large7"
+  children: "meteor_small3"
+  children: "meteor_stony3"
+  children: "meteor_treasure3"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors4"
+  children: "meteor_asteroid4"
+  children: "meteor_large8"
+  children: "meteor_large9"
+  children: "meteor_small4"
+  children: "meteor_stony4"
+  children: "meteor_treasure4"
+  data: ""
+  position {
+    x: 0.0
+    y: 2584.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "meteors5"
+  children: "meteor_asteroid5"
+  children: "meteor_large10"
+  children: "meteor_large11"
+  children: "meteor_small5"
+  children: "meteor_stony5"
+  children: "meteor_treasure5"
+  data: ""
+  position {
+    x: 0.0
+    y: 5227.0
+    z: 0.0
   }
   rotation {
     x: 0.0

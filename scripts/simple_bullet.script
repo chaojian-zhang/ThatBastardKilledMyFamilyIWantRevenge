@@ -12,7 +12,6 @@
 go.property("speed", 800)
 go.property("life", 10)					-- For long-lasting weapons there is no termination life; Otherwise use 1 second
 go.property("frequency", 10)
-go.property("max_distance", 1600)		-- Usually this is disgonal display distance
 go.property("damage", 1)
 go.property("game_gui", msg.url("main#gui"))
 
@@ -28,7 +27,8 @@ end
 function init(self)
 	-- rotate the velocity vector to our orientation.
 	self.velocity = vmath.rotate(go.get_rotation(), vmath.vector3(0, 1, 0))
-	self.distance = 0
+	self.screen_width = tonumber(sys.get_config("display.width"))
+	self.screen_height = tonumber(sys.get_config("display.height"))
 end
 
 function update(self, dt)
@@ -41,8 +41,7 @@ function update(self, dt)
 		explode(self)
 	end
 
-	self.distance = self.distance + self.speed * dt
-	if self.distance > self.max_distance then
+	if pos.x < 0 or pos.x > self.screen_width or pos.y < 0 or pos.y > self.screen_height then
 		-- delete the shot when it has travelled off screen.
 		go.delete()
 	end
