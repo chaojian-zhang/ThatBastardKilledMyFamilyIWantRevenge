@@ -34,6 +34,8 @@ embedded_components {
   "group: \"player\"\n"
   "mask: \"enemy\"\n"
   "mask: \"enemy_weapon\"\n"
+  "mask: \"special\"\n"
+  "mask: \"pickup\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"

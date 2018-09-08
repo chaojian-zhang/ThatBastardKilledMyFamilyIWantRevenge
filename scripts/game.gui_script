@@ -28,6 +28,10 @@ local function reinitialize(self)
 		gui.set_enabled(self.button_node, true)
 	end
 
+	-- disable volume icon
+	local icon = gui.get_node("voice")
+	gui.set_enabled(icon, false)
+
 	-- hide self
 	msg.post(".", "disable")
 end
@@ -64,6 +68,17 @@ local function set_lives(self, lives)
 		pos.x = 660 - i * 60
 		gui.set_position(new, pos)
 	end
+end
+
+local function hide_voice_icon(self, handle, time_elapsed)
+	local icon = gui.get_node("voice")
+	gui.set_enabled(icon, false)
+end
+
+local function show_voice_icon(self)
+	local icon = gui.get_node("voice")
+	gui.set_enabled(icon, true)
+	timer.delay(2, false, hide_voice_icon) 	-- automatically hide the icon in 2 seconds
 end
 
 --- event API
@@ -143,6 +158,8 @@ function on_message(self, message_id, message, sender)
 		reinitialize(self)
 	elseif message_id == hash("set_lives") then
 		set_lives(self, message.lives)
+	elseif message_id == hash("play_new_voice") then
+		show_voice_icon(self)
 	elseif message_id == hash("add_score") then
 		self.score = self.score + message.amount
 		gui.set_text(self.score_node, "Score: "..tostring(self.score))

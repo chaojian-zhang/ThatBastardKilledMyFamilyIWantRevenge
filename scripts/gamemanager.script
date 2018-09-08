@@ -74,6 +74,7 @@ end
 
 ---- Functions
 local function reinitialize(self)
+	math.randomseed(socket.gettime())	-- seems not working full context wise
 	self.current_level = nil
 	self.loaded_levels = {}		-- To make sure we don't spawn each leve multiple times, which can happen on mobile
 	self.loading_levels = {}

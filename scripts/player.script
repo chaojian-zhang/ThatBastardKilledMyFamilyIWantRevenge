@@ -139,6 +139,8 @@ function on_message(self, message_id, message, sender)
 			self.dir = vmath.normalize(self.dir)
 		end
 	elseif message_id == hash("collision_response") then
+		if message.other_group == hash("special") then return end	-- don't responde to special items (e.g. voices)
+		
 		if self.started == true then 
 			-- temporarily disable self for future hit
 			self.started = false

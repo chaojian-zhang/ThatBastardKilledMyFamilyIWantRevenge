@@ -13,6 +13,9 @@ images {
 images {
   image: "/assets/gui/ui_mobile_button.png"
 }
+images {
+  image: "/assets/gui/ui_volume.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
